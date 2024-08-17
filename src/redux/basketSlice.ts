@@ -1,5 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { stateType } from "../types/typeBasket";
+import { RootState } from "./store";
 
 const stateItem: stateType = {
     items: [],
@@ -57,6 +58,6 @@ const { actions, reducer }  = basketSlice
 
 export const { addItem, removeItem } = actions
 
-export const basketState = (state) => state.basket
+export const basketState = (state:RootState) => state.basket
 
 export default reducer

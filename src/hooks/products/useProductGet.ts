@@ -15,7 +15,6 @@ const useProductGet = () => {
     })
 
     return {data , error}
-
 }
 
 export default useProductGet

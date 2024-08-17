@@ -1,10 +1,11 @@
 import { useDispatch } from "react-redux"
 import { typeProduct } from "../types/typeProduct"
-import { addItem, removeItem } from "../redux/basketSlice"
 import { useLocation } from "react-router-dom"
+import Portal from "../utils/Portal"
+import { FC, SetStateAction } from "react"
 
-const ShowItem = ({ product }: { product: typeProduct }) => {
-
+const ShowItem = ({ product, portal }: { product: typeProduct, portal :any }) => {
+    
     const dispatch = useDispatch()
 
     const location = useLocation()
@@ -16,6 +17,7 @@ const ShowItem = ({ product }: { product: typeProduct }) => {
                     className="w-[100%] rounded-2xl"
                     src={product.image}
                     alt={product.name}
+                    onClick={() => (portal(product))}
                 />
                 <div className="flex justify-between text-[14px] font-bold my-2">
                     <p className="">{product.name}</p>
@@ -24,9 +26,6 @@ const ShowItem = ({ product }: { product: typeProduct }) => {
                 <p className="text-[14px]">{product.description}</p>
                 <p>{product.rate} star</p>
             </div>
-
-
-
 
             {/* <button
                 className={`
