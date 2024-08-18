@@ -1,13 +1,14 @@
 import { useState } from "react"
 import SecondHeader from "../../components/SecondHeader"
 import ShowItem from "../../components/ShowItem"
-import useLastProducts from "../../hooks/products/useLastProducts"
 import Portal from "../../utils/Portal"
 import { typeProduct } from "../../types/typeProduct"
+import useProductGet from "../../hooks/products/useProductGet"
+
 
 const IndexHome = () => {
 
-    const { data, error } = useLastProducts()
+    const { data, error } = useProductGet()
 
     const [showPrtal, setShowPortal] = useState<typeProduct | null>(null)
 
@@ -36,7 +37,9 @@ const IndexHome = () => {
                 </div>
             </div>
 
-            {showPrtal && <Portal item={showPrtal} close={setShowPortal}/>}
+            
+
+            {showPrtal && <Portal item={showPrtal} close={setShowPortal} />}
         </>
     )
 }

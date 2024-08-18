@@ -1,8 +1,7 @@
 import { useDispatch } from "react-redux"
 import { typeProduct } from "../types/typeProduct"
 import { useLocation } from "react-router-dom"
-import Portal from "../utils/Portal"
-import { FC, SetStateAction } from "react"
+import Rating from "../components/Rating"
 
 const ShowItem = ({ product, portal }: { product: typeProduct, portal :any }) => {
     
@@ -23,8 +22,8 @@ const ShowItem = ({ product, portal }: { product: typeProduct, portal :any }) =>
                     <p className="">{product.name}</p>
                     <p>{product.price} $</p>
                 </div>
-                <p className="text-[14px]">{product.description}</p>
-                <p>{product.rate} star</p>
+                <p className="text-[14px] my-2">{product.description}</p>
+                <p><Rating score={product.rate}/></p>
             </div>
 
             {/* <button
