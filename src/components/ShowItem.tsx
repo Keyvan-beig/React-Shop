@@ -1,14 +1,7 @@
-import { useDispatch } from "react-redux"
 import { typeProduct } from "../types/typeProduct"
-import { useLocation } from "react-router-dom"
-import Rating from "../components/Rating"
+import { Rating } from "@mui/material"
 
 const ShowItem = ({ product, portal }: { product: typeProduct, portal :any }) => {
-    
-    const dispatch = useDispatch()
-
-    const location = useLocation()
-
     return (
         <>
             <div>
@@ -23,26 +16,8 @@ const ShowItem = ({ product, portal }: { product: typeProduct, portal :any }) =>
                     <p>{product.price} $</p>
                 </div>
                 <p className="text-[14px] my-2">{product.description}</p>
-                <p><Rating score={product.rate}/></p>
+                <Rating value={product.rate} readOnly/>
             </div>
-
-            {/* <button
-                className={`
-                    p-2 
-                  bg-slate-500 
-                    mx-3 
-                  text-white`
-                }
-                onClick={() => {
-                    location.pathname === "/products" ?
-                        dispatch(addItem(product)) :
-                        dispatch(removeItem(product))
-                }}
-            >
-                {location.pathname === "/products" ? "Add Item" : "Remove Item"}
-            </button> */}
-
-
         </>
     )
 }

@@ -44,10 +44,6 @@ export default function AnchorTemporaryDrawer() {
             onKeyDown={toggleDrawer(anchor, false)}
         >
             <List>
-               
-                Account
-
-                Cart
                 {['Categories', 'Deals', "What's New", 'Delivery'].map((text, index) => (
                     <ListItem key={text} disablePadding>
                         <ListItemButton>
