@@ -8,7 +8,8 @@ export interface typeProductBasket {
     name: string;
     price: number;
     rate: number;
-    quantity: number;
+    count : number
+    size : string
 }
 
 export interface stateType {

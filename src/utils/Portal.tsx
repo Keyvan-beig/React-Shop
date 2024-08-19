@@ -1,15 +1,16 @@
 import ReactDOM from "react-dom"
 import { IoCloseCircleOutline } from "react-icons/io5";
-import { CiCircleMinus } from "react-icons/ci";
-import { CiCirclePlus } from "react-icons/ci";
 import { typeProduct } from "../types/typeProduct";
 import { FiTruck } from "react-icons/fi";
 import { LuShieldOff } from "react-icons/lu";
-import { useDispatch } from "react-redux";
-import { addItem } from "../redux/basketSlice";
+import { useDispatch, useSelector } from "react-redux";
+import { addItem, basketState } from "../redux/basketSlice";
 import { Rating } from "@mui/material";
 import ToggelBottom from "../components/ToggelBottom";
 import { useState } from "react";
+import Count from "../components/Count";
+import ModalUpdateProd from "../components/ModalUpdateProd";
+
 
 interface PageProp {
     item: typeProduct
@@ -28,14 +29,31 @@ const dialogStyle: {} = {
 const Portal: React.FC<PageProp> = ({ item, close }) => {
 
     const addBasket = useDispatch()
+    const basket = useSelector(basketState)
 
-    const [size, setSize] = useState("S") 
+    const [size, setSize] = useState("S")
+    const [count, setCount] = useState(1)
+    const [modalOpen, setModalOpen] = useState(false);
 
-    window.document.addEventListener('click', (event: any) => {
+    const outSide = (event: any) => {
         if (event.target.id === "myDiv") {
             close(null)
         }
-    });
+    }
+
+    window.document.addEventListener('click', outSide)
+
+    const checkBasket = () => {
+
+        basket.items.map(product => {
+
+            if (item.id === product.id) {
+                return setModalOpen(true)
+            }
+        })
+
+        return addBasket(addItem({ ...item, size: size, count: count }))
+    }
 
     const modalContent = (
         <>
@@ -72,11 +90,7 @@ const Portal: React.FC<PageProp> = ({ item, close }) => {
                             </div>
                             <p className="text-[14px] my-2">{item.description}</p>
                             <Rating value={item.rate} readOnly />
-                            <div className="flex [&>*]:border [&>*]:px-2 my-3">
-                                <button style={{ borderRadius: "10px 0 0 10px" }}><CiCircleMinus /></button>
-                                <p>01</p>
-                                <button style={{ borderRadius: "0 10px 10px 0" }}><CiCirclePlus /></button>
-                            </div>
+                            <Count count={count} setCount={setCount} />
                             <ToggelBottom size={size} setSize={setSize} />
                         </div>
                         <div>
@@ -98,12 +112,11 @@ const Portal: React.FC<PageProp> = ({ item, close }) => {
                                     <p>With-in 5days of product delivery.</p>
                                 </div>
                             </div>
-                            
+
                             <div className="my-2">
                                 <button
                                     className="px-5 py-1 border rounded-3xl"
-                                    onClick={() => addBasket(addItem(item))}
-                                >
+                                    onClick={() => checkBasket()}>
                                     add Item
                                 </button>
                                 <button
@@ -118,6 +131,9 @@ const Portal: React.FC<PageProp> = ({ item, close }) => {
                     </div>
                 </div>
             </div>
+
+            {modalOpen && <ModalUpdateProd open={modalOpen} setOpen={setModalOpen} item={{ ...item, count: count, size: size }} />}
+
         </>
     )
 
