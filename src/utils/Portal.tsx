@@ -10,6 +10,7 @@ import ToggelBottom from "../components/ToggelBottom";
 import { useState } from "react";
 import Count from "../components/Count";
 import ModalUpdateProd from "../components/ModalUpdateProd";
+import AlertSnackBar from "../components/AlertSnackBar";
 
 
 interface PageProp {
@@ -23,7 +24,7 @@ const dialogStyle: {} = {
     height: "100vh",
     width: "100%",
     direction: "rtl",
-    zIndex: 0
+    zIndex: 10
 }
 
 const Portal: React.FC<PageProp> = ({ item, close }) => {
@@ -34,6 +35,7 @@ const Portal: React.FC<PageProp> = ({ item, close }) => {
     const [size, setSize] = useState("S")
     const [count, setCount] = useState(1)
     const [modalOpen, setModalOpen] = useState(false);
+    const [alertOpen, setAlertOpen] = useState(false);
 
     const outSide = (event: any) => {
         if (event.target.id === "myDiv") {
@@ -45,14 +47,14 @@ const Portal: React.FC<PageProp> = ({ item, close }) => {
 
     const checkBasket = () => {
 
-        basket.items.map(product => {
+        const check = basket.items.some(product => item.id === product.id)
 
-            if (item.id === product.id) {
-                return setModalOpen(true)
-            }
-        })
-
-        return addBasket(addItem({ ...item, size: size, count: count }))
+        if(check){
+            setModalOpen(true)
+        }else{
+            addBasket(addItem({ ...item, size: size, count: count }))
+            setAlertOpen(true)
+        }
     }
 
     const modalContent = (
@@ -132,7 +134,9 @@ const Portal: React.FC<PageProp> = ({ item, close }) => {
                 </div>
             </div>
 
-            {modalOpen && <ModalUpdateProd open={modalOpen} setOpen={setModalOpen} item={{ ...item, count: count, size: size }} />}
+            {modalOpen && <ModalUpdateProd alert={setAlertOpen}  open={modalOpen} setOpen={setModalOpen} item={{ ...item, count: count, size: size }} />}
+
+            {alertOpen && <AlertSnackBar open={alertOpen} setOpen={setAlertOpen}/>}
 
         </>
     )

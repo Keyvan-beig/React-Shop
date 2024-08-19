@@ -4,7 +4,7 @@ import ShowItem from "../../components/ShowItem"
 import Portal from "../../utils/Portal"
 import { typeProduct } from "../../types/typeProduct"
 import useProductGet from "../../hooks/products/useProductGet"
-
+import AutoSlider from "../../components/AutoSlider"
 
 const IndexHome = () => {
 
@@ -18,7 +18,7 @@ const IndexHome = () => {
                 <SecondHeader />
 
                 <div className="w-[100%] h-44 border">
-                    slider
+                    <AutoSlider/>
 
                 </div>
 
@@ -36,8 +36,6 @@ const IndexHome = () => {
                     }
                 </div>
             </div>
-
-            
 
             {showPrtal && <Portal item={showPrtal} close={setShowPortal} />}
         </>

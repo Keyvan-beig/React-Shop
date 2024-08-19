@@ -19,7 +19,7 @@ const Transition = React.forwardRef(function Transition(
     return <Slide direction="up" ref={ref} {...props} />;
 });
 
-const ModalUpdateProd: React.FC<any> = ({ open, setOpen ,item }) => {
+const ModalUpdateProd: React.FC<any> = ({ open, setOpen ,item,alert }) => {
 
     const dispatch = useDispatch()
 
@@ -31,6 +31,7 @@ const ModalUpdateProd: React.FC<any> = ({ open, setOpen ,item }) => {
 
         dispatch(updateBasket(item))
         handleClose()
+        alert(true)
     }
 
     return (

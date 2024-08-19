@@ -8,9 +8,6 @@ const Footer = () => {
 
     const basket = useSelector(basketState)
 
-    console.log(basket);
-
-
     return (
         <div className="
             bg-[#FE8A00] 

@@ -29,7 +29,7 @@ const basketSlice = createSlice({
 
                 state.items.push(item)
 
-            } 
+            }
         },
         removeItem: (state: stateType, action: typeAction) => {
 
