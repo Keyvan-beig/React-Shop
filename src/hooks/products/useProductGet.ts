@@ -3,18 +3,19 @@ import supabase from "../../supaBase/supaBase";
 
 const useProductGet = () => {
 
-    const {data , error} = useQuery({
-        
+    const { data, error } = useQuery({
+
         queryKey: ['product'],
         queryFn: async () => {
 
-            const { data } = await supabase.from('products').select('*')
 
-            return data 
+            return await supabase.from('products').select('*')
+
+
         }
     })
 
-    return {data , error}
+    return { data, error }
 }
 
 export default useProductGet

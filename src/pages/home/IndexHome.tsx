@@ -5,21 +5,32 @@ import Portal from "../../utils/Portal"
 import { typeProduct } from "../../types/typeProduct"
 import useProductGet from "../../hooks/products/useProductGet"
 import AutoSlider from "../../components/AutoSlider"
+import BackDropLoading from "../../components/BackDropLoading"
+import ErrorDialog from "../../components/ErrorDialog"
+
+interface typeData {
+    data: typeProduct[]
+    error: string | null
+}
 
 const IndexHome = () => {
 
     const { data, error } = useProductGet()
 
+    const [openError, setOpenError] = useState(false);
+
     const [showPrtal, setShowPortal] = useState<typeProduct | null>(null)
 
     return (
         <>
-            <div className="m-auto w-[90%] bg-gray-50 p-5">
+            {!data?.data && !data?.error && <div className="h-[100vh] bg-white"><BackDropLoading /> </div> }
+
+            {data?.data && <div className="m-auto w-[90%] bg-gray-50 p-5">
+
                 <SecondHeader />
 
                 <div className="w-[100%] h-44 border">
-                    <AutoSlider/>
-
+                    <AutoSlider />
                 </div>
 
                 <div className="
@@ -30,12 +41,13 @@ const IndexHome = () => {
                     gap-4
                     my-4 
                 ">
-                    {error && error.message}
-                    {!data && "Loading..."}
-                    {data && data.map(item => <ShowItem key={item.id} product={item} portal={setShowPortal} />)
-                    }
+
+                    {data?.data && data?.data.map(item => <ShowItem key={item.id} product={item} portal={setShowPortal} />)}
                 </div>
             </div>
+            }
+
+            {data?.error && <div className="h-[100vh] bg-white"><ErrorDialog message={data?.error.message}/></div>}
 
             {showPrtal && <Portal item={showPrtal} close={setShowPortal} />}
         </>
