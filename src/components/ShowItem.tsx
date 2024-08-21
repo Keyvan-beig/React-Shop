@@ -1,22 +1,40 @@
 import { typeProduct } from "../types/typeProduct"
 import { Rating } from "@mui/material"
+import { useState } from "react";
+import BasketOnImage from "./BasketOnImage";
+import IsWishList from "./isWishList";
 
-const ShowItem = ({ product, portal }: { product: typeProduct, portal :any }) => {
+interface propType {
+    product: typeProduct
+    portal: any
+}
+
+const ShowItem :React.FC<propType> = ({ product, portal }) => {
+    
+    const [showAddBasket, setShowAddBasket] = useState(false)
+
     return (
         <>
             <div>
-                <img
-                    className="w-[100%] rounded-2xl"
-                    src={product.image}
-                    alt={product.name}
-                    onClick={() => (portal(product))}
-                />
+                <div
+                    onMouseOver={() => setShowAddBasket(true)}
+                    onMouseOut={() => setShowAddBasket(false)}
+                    className="relative"
+                >
+                    <img
+                        className="w-[100%] rounded-2xl"
+                        src={product.image}
+                        alt={product.name}
+                        
+                    />
+                    <IsWishList productId={product.id}/>
+                    {showAddBasket && <BasketOnImage product={product} portal={portal}  />}
+                </div>
                 <div className="flex justify-between text-[14px] font-bold my-2">
                     <p className="">{product.name}</p>
                     <p>{product.price} $</p>
                 </div>
-                <p className="text-[14px] my-2">{product.description}</p>
-                <Rating value={product.rate} readOnly/>
+                <Rating value={product.rate} readOnly />
             </div>
         </>
     )

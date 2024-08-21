@@ -19,7 +19,7 @@ const Transition = React.forwardRef(function Transition(
     return <Slide direction="up" ref={ref} {...props} />;
 });
 
-const ModalUpdateProd: React.FC<any> = ({ open, setOpen ,item,alert }) => {
+const ModalUpdateProd: React.FC<any> = ({ open, setOpen, item, alert }) => {
 
     const dispatch = useDispatch()
 
@@ -27,7 +27,7 @@ const ModalUpdateProd: React.FC<any> = ({ open, setOpen ,item,alert }) => {
         setOpen(false);
     };
 
-    const update = ()=>{
+    const update = () => {
 
         dispatch(updateBasket(item))
         handleClose()
@@ -43,16 +43,16 @@ const ModalUpdateProd: React.FC<any> = ({ open, setOpen ,item,alert }) => {
                 onClose={handleClose}
                 aria-describedby="alert-dialog-slide-description"
             >
-                <DialogTitle>{"Use Google's location service?"}</DialogTitle>
+                <DialogTitle>{"Do you want to update?"}</DialogTitle>
                 <DialogContent>
                     <DialogContentText id="alert-dialog-slide-description">
-                        Let Google help apps determine location. This means sending anonymous
-                        location data to Google, even when no apps are running.
+                        You currently have the product in 
+                        your shopping cart. Do you want to update it?
                     </DialogContentText>
                 </DialogContent>
                 <DialogActions>
                     <Button onClick={handleClose}>Disagree</Button>
-                    <Button onClick={()=>update()}>Agree</Button>
+                    <Button onClick={() => update()}>Agree</Button>
                 </DialogActions>
             </Dialog>
         </React.Fragment>

@@ -12,7 +12,6 @@ import Count from "../components/Count";
 import ModalUpdateProd from "../components/ModalUpdateProd";
 import AlertSnackBar from "../components/AlertSnackBar";
 
-
 interface PageProp {
     item: typeProduct
     close: any
@@ -49,9 +48,9 @@ const Portal: React.FC<PageProp> = ({ item, close }) => {
 
         const check = basket.items.some(product => item.id === product.id)
 
-        if(check){
+        if (check) {
             setModalOpen(true)
-        }else{
+        } else {
             addBasket(addItem({ ...item, size: size, count: count }))
             setAlertOpen(true)
         }
@@ -59,7 +58,7 @@ const Portal: React.FC<PageProp> = ({ item, close }) => {
 
     const modalContent = (
         <>
-            <div style={dialogStyle} id="myDiv">
+            <div style={dialogStyle} id="myDiv" className="backdrop-blur-sm">
                 <div className="
                 w-[25%] 
                 min-w-80 
@@ -117,7 +116,16 @@ const Portal: React.FC<PageProp> = ({ item, close }) => {
 
                             <div className="my-2">
                                 <button
-                                    className="px-5 py-1 border rounded-3xl"
+                                    className="
+                                        px-5 
+                                        py-1 
+                                        border 
+                                        rounded-3xl
+                                        border-[#FE8A00] 
+                                        text-[#FE8A00] 
+                                        hover:bg-[#FE8A00] 
+                                        hover:text-white"
+
                                     onClick={() => checkBasket()}>
                                     add Item
                                 </button>
@@ -134,9 +142,9 @@ const Portal: React.FC<PageProp> = ({ item, close }) => {
                 </div>
             </div>
 
-            {modalOpen && <ModalUpdateProd alert={setAlertOpen}  open={modalOpen} setOpen={setModalOpen} item={{ ...item, count: count, size: size }} />}
+            {modalOpen && <ModalUpdateProd alert={setAlertOpen} open={modalOpen} setOpen={setModalOpen} item={{ ...item, count: count, size: size }} />}
 
-            {alertOpen && <AlertSnackBar open={alertOpen} setOpen={setAlertOpen}/>}
+            {alertOpen && <AlertSnackBar open={alertOpen} setOpen={setAlertOpen} />}
 
         </>
     )

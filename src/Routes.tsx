@@ -1,7 +1,7 @@
 import { useRoutes } from "react-router-dom"
 import Home from "./pages/home/Home"
-import BasketCart from "./pages/basketCart/BasketCart"
 import IndexHome from "./pages/home/IndexHome"
+import LoginPage from "./pages/login/LoginPage"
 
 const Routes = ()=>{
     let roters = useRoutes([
@@ -12,13 +12,12 @@ const Routes = ()=>{
                 {
                     index : true,
                     element : <IndexHome/>
-                },
-                {
-                    path : "/basket",
-                    element : <BasketCart/>
-                }
-                
+                }  
             ]
+        },
+        {
+            path:'/login',
+            element : <LoginPage/>
         }
     ])
 
