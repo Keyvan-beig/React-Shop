@@ -8,9 +8,7 @@ const useProductGet = () => {
         queryKey: ['product'],
         queryFn: async () => {
 
-
             return await supabase.from('products').select('*')
-
 
         }
     })

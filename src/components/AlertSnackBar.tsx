@@ -1,12 +1,10 @@
-import Button from '@mui/material/Button';
 import Snackbar, { SnackbarCloseReason } from '@mui/material/Snackbar';
 import Alert from '@mui/material/Alert';
+import { useState } from 'react';
 
-export default function AlertSnackBar({ open, setOpen }: { open: Boolean, setOpen: any }) {
+export default function AlertSnackBar({ type, text,setShowAlert }: { type: any, text: string,setShowAlert:any }) {
 
-  const handleClick = () => {
-    setOpen(true);
-  };
+  const [open, setOpen] = useState(true)
 
   const handleClose = (
     event?: React.SyntheticEvent | Event,
@@ -17,19 +15,19 @@ export default function AlertSnackBar({ open, setOpen }: { open: Boolean, setOpe
     }
 
     setOpen(false);
+    setShowAlert('')
   };
 
   return (
     <div>
-      <Button onClick={handleClick}>Open Snackbar</Button>
-      <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
+      <Snackbar open={open} autoHideDuration={4000} onClose={handleClose}>
         <Alert
           onClose={handleClose}
-          severity="success"
+          severity={type}
           variant="filled"
           sx={{ width: '100%' }}
         >
-          Your request has been successfully completed!
+          {text}
         </Alert>
       </Snackbar>
     </div>

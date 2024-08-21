@@ -144,7 +144,12 @@ const Portal: React.FC<PageProp> = ({ item, close }) => {
 
             {modalOpen && <ModalUpdateProd alert={setAlertOpen} open={modalOpen} setOpen={setModalOpen} item={{ ...item, count: count, size: size }} />}
 
-            {alertOpen && <AlertSnackBar open={alertOpen} setOpen={setAlertOpen} />}
+            {alertOpen &&
+                <AlertSnackBar
+                    setOpen={setAlertOpen}
+                    type={"success"}
+                    text="Your request has been successfully completed!" />
+            }
 
         </>
     )
