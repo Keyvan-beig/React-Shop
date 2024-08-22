@@ -1,77 +1,30 @@
-import { useEffect, useRef, useState } from "react"
+import { useRef, useState } from "react"
 import styles from "./login.module.css"
-import supabase from "../../supaBase/supaBase"
-import setStorage from "../../utils/storage/setStorage"
 import AlertSnackBar from "../../components/AlertSnackBar"
-import { useNavigate } from "react-router-dom"
-
-// interface loginInDataType {
-//     phone: string
-//     password: string
-// }
+import { Box, CircularProgress } from "@mui/material"
+import useLogin from "../../hooks/products/loginPage/useLogin"
+import useSignUp from "../../hooks/products/loginPage/useSignUp"
 
 const LoginPage = () => {
 
     const [toggleForm, setToggleForm] = useState("loginIn")
     const loginInForm = useRef<any>(null)
     const loginUpForm = useRef<any>(null)
+    const [loading, setLoading] = useState(false)
     const [showAlert, setShowAlert] = useState('')
     const [error, setError] = useState('')
-    const navigat = useNavigate()
 
-    const loginInFun = (e: any) => {
+    const { fetchData } = useLogin(setLoading, setShowAlert, setError)
+    const { postData } = useSignUp(setLoading, setShowAlert, setToggleForm, setError)
 
+    const handelSubmit = (e: any) => {
         e.preventDefault()
-        const formData = new FormData(loginInForm.current)
-        const data = formData.entries()
-        const newForm: any = {}
-
-        for (const [key, value] of data) {
-            newForm[key] = value
-        }
-
-        if (newForm.phone.length === 11) {
-            const fetchData = async () => {
-                const { data, error } = await supabase
-                    .from('users')
-                    .select("*")
-                    .eq('phone', newForm.phone)
-                    .eq('password', newForm.password)
-
-                if (data?.length) {
-
-                    setStorage("login", data[0])
-
-                    setShowAlert('success')
-
-                    setTimeout(() => {
-
-                        navigat('/')
-
-                    }, 5000)
-
-                } else if (error) {
-
-                    setError(error.message);
-
-                }
-                else {
-
-                    setShowAlert('error')
-
-                }
-            }
-
-            fetchData()
-        }
+        fetchData(loginInForm.current)
     }
 
     const loginUpFun = (e: any) => {
         e.preventDefault()
-
-
-
-
+        postData(loginUpForm.current)
     }
 
     return (
@@ -85,7 +38,7 @@ const LoginPage = () => {
 
                     <div className={styles.login__forms}>
                         {toggleForm === "loginIn" &&
-                            <form onSubmit={loginInFun} className={styles.login__registre} id="login-in" ref={loginInForm}>
+                            <form onSubmit={handelSubmit} className={styles.login__registre} id="login-in" ref={loginInForm}>
                                 <h1 className={styles.login__title}>Sign In</h1>
 
                                 <div className={styles.login__box}>
@@ -96,7 +49,13 @@ const LoginPage = () => {
                                     <input name="password" type="password" placeholder="Password" className="login__input outline-none" />
                                 </div>
 
-                                <button type="submit" className={styles.login__button}>Sign In</button>
+                                <button type="submit" disabled={loading} className={`${styles.login__button} flex items-center gap-2`}>
+                                    Sign In
+                                    {loading &&
+                                        <Box sx={{ display: 'flex' }}>
+                                            <CircularProgress size={20} />
+                                        </Box>}
+                                </button>
 
                                 <div>
                                     <span className={styles.login__account}>Don't have an Account ?</span>
@@ -110,22 +69,28 @@ const LoginPage = () => {
                                 <h1 className={styles.login__title}>Create Account</h1>
 
                                 <div className={styles.login__box}>
-                                    <input type="phone" placeholder="Phone" className={styles.login__input} />
+                                    <input name="phone" type="phone" placeholder="Phone" className={styles.login__input} />
                                 </div>
 
                                 <div className={styles.login__box}>
-                                    <input type="password" placeholder="password" className={styles.login__input} />
+                                    <input name="password" type="password" placeholder="password" className={styles.login__input} />
                                 </div>
 
                                 <div className={styles.login__box}>
-                                    <input type="text" placeholder="City" className={styles.login__input} />
+                                    <input name="city" type="text" placeholder="City" className={styles.login__input} />
                                 </div>
 
                                 <div className={styles.login__box}>
-                                    <input type="text" placeholder="Address" className={styles.login__input} />
+                                    <input name="address" type="text" placeholder="Address" className={styles.login__input} />
                                 </div>
 
-                                <button type="submit" className={styles.login__button}>Sign Up</button>
+                                <button type="submit" className={`${styles.login__button} flex items-center gap-2`}>
+                                    Sign Up
+                                    {loading &&
+                                        <Box sx={{ display: 'flex' }}>
+                                            <CircularProgress size={20} />
+                                        </Box>}
+                                </button>
 
                                 <div>
                                     <span className={styles.login__account}>Already have an Account ?</span>
@@ -139,7 +104,7 @@ const LoginPage = () => {
 
             {showAlert === "success" && <AlertSnackBar setShowAlert={setShowAlert} type={"success"} text={"login successfully"} />}
             {showAlert === "error" && <AlertSnackBar setShowAlert={setShowAlert} type={"error"} text={"user not found"} />}
-            {error  && <AlertSnackBar setShowAlert={setError} type={"error"} text={error} />}
+            {error && <AlertSnackBar setShowAlert={setError} type={"error"} text={error} />}
 
 
         </>
