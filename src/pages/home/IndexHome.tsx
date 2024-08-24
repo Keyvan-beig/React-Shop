@@ -8,16 +8,9 @@ import BackDropLoading from "../../components/loading/BackDropLoading"
 import ErrorDialog from "../../components/modal/ErrorDialog"
 import Slider from "../../components/Slider"
 
-interface typeData {
-    data: typeProduct[]
-    error: string | null
-}
-
 const IndexHome = () => {
 
-    const { data, error } = useProductGet()
-
-    const [openError, setOpenError] = useState(false);
+    const { data } = useProductGet()
 
     const [showPrtal, setShowPortal] = useState<typeProduct | null>(null)
 

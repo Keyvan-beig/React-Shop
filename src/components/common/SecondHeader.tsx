@@ -4,7 +4,6 @@ import ShowCartModal from "../../utils/ShowCartModal";
 import MenuAcount from "../menu/MenuAcount";
 import getStorage from "../../utils/storage/getStorage";
 import ShoudLogin from "../modal/ShoudLogin";
-import { useNavigate } from "react-router-dom";
 
 const SecondHeader = () => {
 

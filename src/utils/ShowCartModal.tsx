@@ -20,9 +20,6 @@ const ShowCartModal: React.FC<any> = ({ setShowCart }) => {
 
     const user = getStorage("login")
 
-    console.log(user);
-    
-
     const ShowCart = (
         <div id="myDiv" className="
             flex 
