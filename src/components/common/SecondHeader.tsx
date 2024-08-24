@@ -1,7 +1,9 @@
 import { RxPerson } from "react-icons/rx";
-import AnchorTemporaryDrawer from "../utils/AnchorTemporaryDrawer";
+import AnchorTemporaryDrawer from "../../utils/AnchorTemporaryDrawer";
 import { useState } from "react";
-import ShowCartModal from "../utils/ShowCartModal";
+import ShowCartModal from "../../utils/ShowCartModal";
+import { NavLink } from "react-router-dom";
+import MenuAcount from "../menu/MenuAcount";
 
 const SecondHeader = () => {
 
@@ -23,8 +25,9 @@ const SecondHeader = () => {
                     </div>
                 </div>
                 <div className="hidden lg:flex items-center">
-                    <RxPerson />
-                    <p className="mx-1">Account</p>
+                    {/* <RxPerson /> */}
+                    {/* <NavLink to={"/login"} className="mx-1">Account</NavLink> */}
+                    <MenuAcount />
                     <p onClick={() => setShowCart(!showCart)} className="mx-5">Cart</p>
                 </div>
                 <div className="block lg:hidden">

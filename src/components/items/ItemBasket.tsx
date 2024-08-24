@@ -1,5 +1,5 @@
 import { Rating } from "@mui/material"
-import { typeProductBasket } from "../types/typeBasket"
+import { typeProductBasket } from "../../types/typeBasket"
 
 const ItemBasket = ({ product }: { product: typeProductBasket }) => {
 

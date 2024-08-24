@@ -2,7 +2,7 @@ import { LuShoppingBag } from "react-icons/lu";
 import { SlBasket } from "react-icons/sl";
 import { CiHeart } from "react-icons/ci";
 import { useSelector } from "react-redux";
-import { basketState } from "../redux/basketSlice";
+import { basketState } from "../../redux/basketSlice";
 
 const Footer = () => {
 

@@ -6,11 +6,11 @@ import { LuShieldOff } from "react-icons/lu";
 import { useDispatch, useSelector } from "react-redux";
 import { addItem, basketState } from "../redux/basketSlice";
 import { Rating } from "@mui/material";
-import ToggelBottom from "../components/ToggelBottom";
+import ToggelBottom from "../components/bottom/ToggelBottom";
 import { useState } from "react";
-import Count from "../components/Count";
-import ModalUpdateProd from "../components/ModalUpdateProd";
-import AlertSnackBar from "../components/AlertSnackBar";
+import Count from "../components/bottom/Count";
+import ModalUpdateProd from "../components/modal/ModalUpdateProd";
+import AlertSnackBar from "../components/alert/AlertSnackBar";
 
 interface PageProp {
     item: typeProduct

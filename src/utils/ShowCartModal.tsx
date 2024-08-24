@@ -1,10 +1,11 @@
 import ReactDOM from "react-dom"
 import { useSelector } from "react-redux"
 import { basketState } from "../redux/basketSlice"
-import ItemBasket from "../components/ItemBasket"
+import ItemBasket from "../components/items/ItemBasket"
 import { IoIosCloseCircleOutline } from "react-icons/io";
 import { FiTruck } from "react-icons/fi";
 import { LuShieldOff } from "react-icons/lu";
+import getStorage from "./storage/getStorage";
 
 const ShowCartModal: React.FC<any> = ({ setShowCart }) => {
 
@@ -17,6 +18,11 @@ const ShowCartModal: React.FC<any> = ({ setShowCart }) => {
     }
     window.document.addEventListener('click', outSide)
 
+    const user = getStorage("login")
+
+    console.log(user);
+    
+
     const ShowCart = (
         <div id="myDiv" className="
             flex 
@@ -27,6 +33,7 @@ const ShowCartModal: React.FC<any> = ({ setShowCart }) => {
             top-0
             w-full
             h-[100vh]
+            text-[14px]
             ">
             <div className="
                 grid 
@@ -51,7 +58,17 @@ const ShowCartModal: React.FC<any> = ({ setShowCart }) => {
                             "no item"
                         }
                     </div>
-                    <div>
+                    <div className="grid content-between p-5" style={{fontFamily:"outfit"}}>
+                        <p className="text-[20px]">Delivery Information</p>
+
+                        <div className="text-[16px]">
+                            <p>{user.fullName}</p>
+                            <p>{user.city}</p>
+                        </div>
+
+                        <p className="text-[16px]">
+                            {user.address}
+                        </p>
 
                     </div>
                 </div>
@@ -79,7 +96,7 @@ const ShowCartModal: React.FC<any> = ({ setShowCart }) => {
                             <p>0</p>
                         </div>
                     </div>
-                    <div className="bg-gray-200 p-3">
+                    <div className="bg-gray-200 p-3 rounded-lg">
                         <div className="flex items-center gap-2">
                             <div>
                                 <FiTruck />

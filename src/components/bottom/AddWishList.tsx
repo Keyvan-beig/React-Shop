@@ -1,15 +1,18 @@
 import { useDispatch, useSelector } from "react-redux"
-import { addWish, removeWish, wishState } from "../redux/wishListSlice"
+import { addWish, removeWish, wishState } from "../../redux/wishListSlice"
 import { CiHeart } from "react-icons/ci"
 
 interface propType {
-
     productId: string
 }
 
-const IsWishList: React.FC<propType> = ({ productId }) => {
+interface wishSttType {
+    itemsId: string[]
+}
 
-    const wishStt = useSelector(wishState)
+const AddWishList: React.FC<propType> = ({ productId }) => {
+
+    const wishStt : wishSttType = useSelector(wishState)
     const dispatch = useDispatch()
     const isWish = wishStt.itemsId.some(item => item === productId)
 
@@ -45,4 +48,4 @@ const IsWishList: React.FC<propType> = ({ productId }) => {
     )
 }
 
-export default IsWishList
+export default AddWishList

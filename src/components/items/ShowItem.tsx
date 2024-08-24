@@ -1,8 +1,8 @@
-import { typeProduct } from "../types/typeProduct"
+import { typeProduct } from "../../types/typeProduct"
 import { Rating } from "@mui/material"
 import { useState } from "react";
-import BasketOnImage from "./BasketOnImage";
-import IsWishList from "./isWishList";
+import AddWishList from "../bottom/AddWishList";
+import AddBasket from "../bottom/AddBasket";
 
 interface propType {
     product: typeProduct
@@ -27,8 +27,8 @@ const ShowItem :React.FC<propType> = ({ product, portal }) => {
                         alt={product.name}
                         
                     />
-                    <IsWishList productId={product.id}/>
-                    {showAddBasket && <BasketOnImage product={product} portal={portal}  />}
+                    <AddWishList productId={product.id}/>
+                    {showAddBasket && <AddBasket product={product} portal={portal}  />}
                 </div>
                 <div className="flex justify-between text-[14px] font-bold my-2">
                     <p className="">{product.name}</p>

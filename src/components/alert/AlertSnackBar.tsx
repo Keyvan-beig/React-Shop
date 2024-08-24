@@ -1,8 +1,13 @@
 import Snackbar, { SnackbarCloseReason } from '@mui/material/Snackbar';
 import Alert from '@mui/material/Alert';
-import { useState } from 'react';
+import React, { useState } from 'react';
 
-export default function AlertSnackBar({ type, text,setShowAlert }: { type: any, text: string,setShowAlert:any }) {
+interface propType {
+  type: 'error' | 'success' | 'info' | 'warning'
+  text: string
+}
+
+const AlertSnackBar: React.FC<propType> = ({ type, text }) => {
 
   const [open, setOpen] = useState(true)
 
@@ -13,9 +18,8 @@ export default function AlertSnackBar({ type, text,setShowAlert }: { type: any, 
     if (reason === 'clickaway') {
       return;
     }
-
+    
     setOpen(false);
-    setShowAlert('')
   };
 
   return (
@@ -33,3 +37,5 @@ export default function AlertSnackBar({ type, text,setShowAlert }: { type: any, 
     </div>
   );
 }
+
+export default AlertSnackBar

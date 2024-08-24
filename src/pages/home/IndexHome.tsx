@@ -1,12 +1,12 @@
 import { useState } from "react"
-import SecondHeader from "../../components/SecondHeader"
-import ShowItem from "../../components/ShowItem"
+import SecondHeader from "../../components/common/SecondHeader"
+import ShowItem from "../../components/items/ShowItem"
 import Portal from "../../utils/Portal"
 import { typeProduct } from "../../types/typeProduct"
 import useProductGet from "../../hooks/products/useProductGet"
-import AutoSlider from "../../components/AutoSlider"
-import BackDropLoading from "../../components/BackDropLoading"
-import ErrorDialog from "../../components/ErrorDialog"
+import BackDropLoading from "../../components/loading/BackDropLoading"
+import ErrorDialog from "../../components/modal/ErrorDialog"
+import Slider from "../../components/Slider"
 
 interface typeData {
     data: typeProduct[]
@@ -30,7 +30,7 @@ const IndexHome = () => {
                 <SecondHeader />
 
                 <div className="w-[100%] h-44 border">
-                    <AutoSlider />
+                    <Slider />
                 </div>
 
                 <div className="
@@ -43,6 +43,7 @@ const IndexHome = () => {
                 ">
 
                     {data?.data && data?.data.map(item => <ShowItem key={item.id} product={item} portal={setShowPortal} />)}
+
                 </div>
             </div>
             }
