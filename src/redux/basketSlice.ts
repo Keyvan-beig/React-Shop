@@ -4,6 +4,11 @@ import { RootState } from "./store";
 import getStorage from "../utils/storage/getStorage";
 import setStorage from "../utils/storage/setStorage";
 
+interface typeAction {
+    type: string;
+    payload: typeProductBasket;
+}
+
 const storage = getStorage('basket')
 
 const stateItem: stateType = {
@@ -11,11 +16,6 @@ const stateItem: stateType = {
     invoice: {
         totalPrice: storage ? storage.invoice.totalPrice : 0
     }
-}
-
-interface typeAction {
-    type: string;
-    payload: typeProductBasket;
 }
 
 const basketSlice = createSlice({

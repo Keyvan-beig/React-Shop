@@ -14,7 +14,7 @@ import { Box } from '@mui/material';
 
 type Anchor = 'top' | 'left' | 'bottom' | 'right';
 
-export default function AnchorTemporaryDrawer() {
+export default function DrawerHome() {
   const [state, setState] = React.useState({
     top: false,
     left: false,

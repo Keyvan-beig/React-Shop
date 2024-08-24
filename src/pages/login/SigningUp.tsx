@@ -1,5 +1,5 @@
 import styles from "./login.module.css"
-import { useRef, useState } from "react"
+import { FormEvent, useRef, useState } from "react"
 import formData from "../../utils/form/formData"
 import useCreateAds from "../../hooks/form/useCreateAds"
 import { Box, CircularProgress } from "@mui/material"
@@ -8,7 +8,7 @@ import useCheckUser from "../../hooks/form/useCheckUser"
 interface propType {
     setShowAlert: (ShowAlert: string) => void
     setErr: (err: string) => void
-    setToggleForm: (toggleForm: string) => void
+    setToggleForm: (toggleForm: "loginIn" | "loginUp") => void
 }
 
 const SigningUp: React.FC<propType> = ({ setShowAlert, setErr, setToggleForm }) => {
@@ -20,7 +20,7 @@ const SigningUp: React.FC<propType> = ({ setShowAlert, setErr, setToggleForm }) 
     const loginUpForm = useRef<any>(null)
     const [loading, setLoading] = useState(false)
 
-    const handelSignUp = async (e: any) => {
+    const handelSignUp = async (e: FormEvent) => {
         e.preventDefault()
 
         setLoading(true)
@@ -29,10 +29,10 @@ const SigningUp: React.FC<propType> = ({ setShowAlert, setErr, setToggleForm }) 
 
         const { formList } = formData(loginUpForm.current)
 
-        const { data:check } = await checkUser(formList)
+        const { data: check } = await checkUser(formList)
 
         if (check && !check.length) {
-            
+
             const { data } = await mutateAsync(formList)
             setLoading(false)
 

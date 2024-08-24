@@ -6,13 +6,9 @@ interface propType {
     productId: string
 }
 
-interface wishSttType {
-    itemsId: string[]
-}
-
 const AddWishList: React.FC<propType> = ({ productId }) => {
 
-    const wishStt: wishSttType = useSelector(wishState)
+    const wishStt = useSelector(wishState)
     const dispatch = useDispatch()
     const isWish = wishStt.itemsId.some(item => item === productId)
 

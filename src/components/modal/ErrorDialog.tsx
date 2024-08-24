@@ -14,7 +14,7 @@ export default function ErrorDialog({ message } : { message : string}) {
                 aria-labelledby="draggable-dialog-title"
             >
                 <DialogTitle style={{ cursor: 'move' }} id="draggable-dialog-title">
-                {message === "TypeError: Failed to fetch" && "Check your conection"}
+                {message === "TypeError: Failed to fetch" ? "Check your conection" : "Error please try again!"}
                 </DialogTitle>
                 <DialogContent>
                     <DialogContentText>

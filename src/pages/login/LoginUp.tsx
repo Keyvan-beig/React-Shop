@@ -1,5 +1,5 @@
 import styles from "./login.module.css"
-import { useRef, useState } from "react"
+import { FormEvent, useRef, useState } from "react"
 import useCheckUser from "../../hooks/form/useCheckUser"
 import formData from "../../utils/form/formData"
 import { Box, CircularProgress } from "@mui/material"
@@ -9,17 +9,17 @@ import { useNavigate } from "react-router-dom"
 interface propType {
     setShowAlert: (ShowAlert: string) => void
     setErr: (err: string) => void
-    setToggleForm: (toggleForm: string) => void
+    setToggleForm: (toggleForm: "loginIn" | "loginUp") => void
 }
 
 const LoginUp: React.FC<propType> = ({ setShowAlert, setErr, setToggleForm }) => {
 
-    const loginInForm = useRef<any>(null)
+    const loginInForm = useRef<any>()
     const [loading, setLoading] = useState(false)
     const { mutateAsync } = useCheckUser()
     const navigat = useNavigate()
 
-    const handelSubmit = async (e: any) => {
+    const handelSubmit = async (e: FormEvent) => {
         e.preventDefault()
 
         setLoading(true)

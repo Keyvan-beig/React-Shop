@@ -2,7 +2,7 @@ import { CiCircleMinus, CiCirclePlus } from "react-icons/ci"
 
 interface countType {
     count: number
-    setCount: any
+    setCount: (count:number)=>void
 }
 
 const Count: React.FC<countType> = ({ count, setCount }) => {

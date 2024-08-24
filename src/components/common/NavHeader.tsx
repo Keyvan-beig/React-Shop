@@ -1,11 +1,11 @@
-import AnchorTemporaryDrawer from "../../utils/AnchorTemporaryDrawer";
+import DrawerHome from "../DrawerHome";
 import { useState } from "react";
-import ShowCartModal from "../../utils/ShowCartModal";
+import ShowCartModal from "../portals/ShowCartModal";
 import MenuAcount from "../menu/MenuAcount";
 import getStorage from "../../utils/storage/getStorage";
 import ShoudLogin from "../modal/ShoudLogin";
 
-const SecondHeader = () => {
+const NavHeader: React.FC = () => {
 
     const [showCart, setShowCart] = useState<boolean>()
     const [open, setOpen] = useState(false);
@@ -35,10 +35,10 @@ const SecondHeader = () => {
                 </div>
                 <div className="hidden lg:flex items-center">
                     <MenuAcount />
-                    <p onClick={handelShowCart} className="mx-5">Cart</p>
+                    <button onClick={handelShowCart} className="mx-5">Cart</button>
                 </div>
                 <div className="block lg:hidden">
-                    <AnchorTemporaryDrawer />
+                    <DrawerHome />
                 </div>
             </div>
 
@@ -47,10 +47,10 @@ const SecondHeader = () => {
                 :
                 ""
             }
-            {open && <ShoudLogin open={open} setOpen={setOpen}/>}
+            {open && <ShoudLogin open={open} setOpen={setOpen} />}
         </>
 
     )
 }
 
-export default SecondHeader
+export default NavHeader

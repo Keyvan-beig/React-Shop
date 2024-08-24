@@ -21,18 +21,18 @@ const AddBasket: React.FC<propType> = ({ product, portal }) => {
         return (
             <div
                 className={`
-                backdrop-blur-sm
-                absolute 
-                top-0 
-                right-0 
-                w-full 
-                h-full 
-                rounded-lg 
-                flex 
-                items-center 
-                justify-center 
-                ${IsInBasket && "z-20"}
-                `
+                    backdrop-blur-sm
+                    absolute 
+                    top-0 
+                    right-0 
+                    w-full 
+                    h-full 
+                    rounded-lg 
+                    flex 
+                    items-center 
+                    justify-center 
+                    ${IsInBasket && "z-20"}
+                    `
                 }
             >
                 <div className="bg-white p-3 rounded-[50%] text-[25px]" >
@@ -61,21 +61,24 @@ const AddBasket: React.FC<propType> = ({ product, portal }) => {
         <>
             <div
                 className={`
-                backdrop-blur-sm
-                absolute 
-                top-0 
-                right-0 
-                w-full 
-                h-full 
-                rounded-lg 
-                flex 
-                items-center 
-                justify-center 
-                ${IsInBasket && "z-20"}
-                `
+                    backdrop-blur-sm
+                    absolute 
+                    top-0 
+                    right-0 
+                    w-full 
+                    h-full 
+                    rounded-lg 
+                    flex 
+                    items-center 
+                    justify-center 
+                    ${IsInBasket && "z-20"}
+                    `
                 }
             >
-                <div className="bg-white p-3 rounded-[50%] text-[25px]" onClick={()=> portal(product)}>
+                <div
+                    className="bg-white p-3 rounded-[50%] text-[25px]"
+                    onClick={() => portal(product)}
+                >
                     <SlBasket />
                 </div>
             </div>

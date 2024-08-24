@@ -1,14 +1,14 @@
 import { useState } from "react"
-import SecondHeader from "../../components/common/SecondHeader"
 import ShowItem from "../../components/items/ShowItem"
-import Portal from "../../utils/Portal"
 import { typeProduct } from "../../types/typeProduct"
 import useProductGet from "../../hooks/products/useProductGet"
 import BackDropLoading from "../../components/loading/BackDropLoading"
 import ErrorDialog from "../../components/modal/ErrorDialog"
 import Slider from "../../components/Slider"
+import ProductDetails from "../../components/portals/ProductDetails"
+import NavHeader from "../../components/common/NavHeader"
 
-const IndexHome = () => {
+const IndexHome: React.FC = () => {
 
     const { data } = useProductGet()
 
@@ -16,11 +16,11 @@ const IndexHome = () => {
 
     return (
         <>
-            {!data?.data && !data?.error && <div className="h-[100vh] bg-white"><BackDropLoading /> </div> }
+            {!data?.data && !data?.error && <div className="h-[100vh] bg-white"><BackDropLoading /></div>}
 
             {data?.data && <div className="m-auto w-[90%] bg-gray-50 p-5">
 
-                <SecondHeader />
+                <NavHeader />
 
                 <div className="w-[100%] h-44 border">
                     <Slider />
@@ -34,16 +34,14 @@ const IndexHome = () => {
                     gap-4
                     my-4 
                 ">
-
                     {data?.data && data?.data.map(item => <ShowItem key={item.id} product={item} portal={setShowPortal} />)}
-
                 </div>
             </div>
             }
 
-            {data?.error && <div className="h-[100vh] bg-white"><ErrorDialog message={data?.error.message}/></div>}
+            {data?.error && <div className="h-[100vh] bg-white"><ErrorDialog message={data?.error.message} /></div>}
 
-            {showPrtal && <Portal item={showPrtal} close={setShowPortal} />}
+            {showPrtal && <ProductDetails item={showPrtal} close={setShowPortal} />}
         </>
     )
 }

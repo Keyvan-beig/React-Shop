@@ -1,6 +1,6 @@
 import { FiPhone } from "react-icons/fi";
 
-const Header = () => {
+const Header: React.FC = () => {
     return (
         <div className="
             bg-[#FE8A00] 
@@ -26,9 +26,6 @@ const Header = () => {
                     Get 50% Off on Selected Item | Shop Now
                 </p>
             </div>
-
-
-
         </div>
     )
 }

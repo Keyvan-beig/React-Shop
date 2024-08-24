@@ -1,7 +1,11 @@
 import { Rating } from "@mui/material"
 import { typeProductBasket } from "../../types/typeBasket"
 
-const ItemBasket = ({ product }: { product: typeProductBasket }) => {
+interface propType {
+    product: typeProductBasket
+}
+
+const ItemBasket: React.FC<propType> = ({ product }) => {
 
     return (
         <div className="flex gap-4 py-1 px-3">

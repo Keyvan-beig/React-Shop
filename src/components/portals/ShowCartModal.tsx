@@ -1,18 +1,23 @@
 import ReactDOM from "react-dom"
 import { useSelector } from "react-redux"
-import { basketState } from "../redux/basketSlice"
-import ItemBasket from "../components/items/ItemBasket"
+import { basketState } from "../../redux/basketSlice"
+import ItemBasket from "../items/ItemBasket"
 import { IoIosCloseCircleOutline } from "react-icons/io";
 import { FiTruck } from "react-icons/fi";
 import { LuShieldOff } from "react-icons/lu";
-import getStorage from "./storage/getStorage";
+import getStorage from "../../utils/storage/getStorage";
 
-const ShowCartModal: React.FC<any> = ({ setShowCart }) => {
+interface propType {
+    setShowCart: (showCart: boolean) => void
+}
+
+const ShowCartModal: React.FC<propType> = ({ setShowCart }) => {
 
     const basketStt = useSelector(basketState)
 
-    const outSide = (event: any) => {
-        if (event.target.id === "myDiv") {
+    const outSide = (event: MouseEvent) => {
+        const target = event.target as HTMLElement
+        if (target.id === "myDiv") {
             setShowCart(false)
         }
     }
@@ -52,10 +57,10 @@ const ShowCartModal: React.FC<any> = ({ setShowCart }) => {
                     <div className="overflow-y-scroll">
                         {basketStt.items.length > 0 ?
                             basketStt.items.map(item => <ItemBasket key={item.id} product={item} />) :
-                            "no item"
+                            <div className="flex items-center justify-center h-full">No Item</div>
                         }
                     </div>
-                    <div className="grid content-between p-5" style={{fontFamily:"outfit"}}>
+                    <div className="grid content-between p-5" style={{ fontFamily: "outfit" }}>
                         <p className="text-[20px]">Delivery Information</p>
 
                         <div className="text-[16px]">

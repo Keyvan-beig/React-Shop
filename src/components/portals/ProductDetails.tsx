@@ -1,20 +1,20 @@
 import ReactDOM from "react-dom"
 import { IoCloseCircleOutline } from "react-icons/io5";
-import { typeProduct } from "../types/typeProduct";
+import { typeProduct } from "../../types/typeProduct";
 import { FiTruck } from "react-icons/fi";
 import { LuShieldOff } from "react-icons/lu";
 import { useDispatch, useSelector } from "react-redux";
-import { addItem, basketState } from "../redux/basketSlice";
+import { addItem, basketState } from "../../redux/basketSlice";
 import { Rating } from "@mui/material";
-import ToggelBottom from "../components/bottom/ToggelBottom";
+import ToggelBottom from "../bottom/ToggelBottom";
 import { useState } from "react";
-import Count from "../components/bottom/Count";
-import ModalUpdateProd from "../components/modal/ModalUpdateProd";
-import AlertSnackBar from "../components/alert/AlertSnackBar";
+import Count from "../bottom/Count";
+import ModalUpdateProd from "../modal/ModalUpdateProd";
+import AlertSnackBar from "../alert/AlertSnackBar";
 
 interface PageProp {
     item: typeProduct
-    close: any
+    close: (showPrtal: typeProduct | null) => void
 }
 
 const dialogStyle: {} = {
@@ -26,9 +26,9 @@ const dialogStyle: {} = {
     zIndex: 10
 }
 
-const Portal: React.FC<PageProp> = ({ item, close }) => {
+const ProductDetails: React.FC<PageProp> = ({ item, close }) => {
 
-    const addBasket = useDispatch()
+    const dispatch = useDispatch()
     const basket = useSelector(basketState)
 
     const [size, setSize] = useState("S")
@@ -36,8 +36,9 @@ const Portal: React.FC<PageProp> = ({ item, close }) => {
     const [modalOpen, setModalOpen] = useState(false);
     const [alertOpen, setAlertOpen] = useState(false);
 
-    const outSide = (event: any) => {
-        if (event.target.id === "myDiv") {
+    const outSide = (event : MouseEvent) => {
+        const target = event.target as HTMLElement
+        if (target.id === "myDiv") {
             close(null)
         }
     }
@@ -51,7 +52,7 @@ const Portal: React.FC<PageProp> = ({ item, close }) => {
         if (check) {
             setModalOpen(true)
         } else {
-            addBasket(addItem({ ...item, size: size, count: count }))
+            dispatch(addItem({ ...item, size: size, count: count }))
             setAlertOpen(true)
         }
     }
@@ -60,18 +61,18 @@ const Portal: React.FC<PageProp> = ({ item, close }) => {
         <>
             <div style={dialogStyle} id="myDiv" className="backdrop-blur-sm">
                 <div className="
-                w-[25%] 
-                min-w-80 
-                bg-white 
-                p-3 m-4 
-                rounded-2xl 
-                flex 
-                justify-between 
-                h-[90vh] 
-                min-h-[550px]
-                text-[14px]
-                fixed
-                z-20
+                    w-[25%] 
+                    min-w-80 
+                  bg-white 
+                    p-3 m-4 
+                    rounded-2xl 
+                    flex 
+                    justify-between 
+                    h-[90vh] 
+                    min-h-[550px]
+                    text-[14px]
+                    fixed
+                    z-20
                 ">
                     <div >
                         <IoCloseCircleOutline onClick={() => close(null)} className="text-[25px]" />
@@ -142,11 +143,16 @@ const Portal: React.FC<PageProp> = ({ item, close }) => {
                 </div>
             </div>
 
-            {modalOpen && <ModalUpdateProd alert={setAlertOpen} open={modalOpen} setOpen={setModalOpen} item={{ ...item, count: count, size: size }} />}
+            {modalOpen &&
+                <ModalUpdateProd
+                    alert={setAlertOpen}
+                    open={modalOpen}
+                    setOpen={setModalOpen}
+                    item={{ ...item, count: count, size: size }}
+                />}
 
             {alertOpen &&
                 <AlertSnackBar
-                    setOpen={setAlertOpen}
                     type={"success"}
                     text="Your request has been successfully completed!" />
             }
@@ -158,4 +164,4 @@ const Portal: React.FC<PageProp> = ({ item, close }) => {
 
 }
 
-export default Portal
+export default ProductDetails

@@ -6,11 +6,11 @@ import AddBasket from "../bottom/AddBasket";
 
 interface propType {
     product: typeProduct
-    portal: any
+    portal: (portal: typeProduct) => void
 }
 
-const ShowItem :React.FC<propType> = ({ product, portal }) => {
-    
+const ShowItem: React.FC<propType> = ({ product, portal }) => {
+
     const [showAddBasket, setShowAddBasket] = useState(false)
 
     return (
@@ -25,10 +25,10 @@ const ShowItem :React.FC<propType> = ({ product, portal }) => {
                         className="w-[100%] rounded-2xl"
                         src={product.image}
                         alt={product.name}
-                        
+
                     />
-                    <AddWishList productId={product.id}/>
-                    {showAddBasket && <AddBasket product={product} portal={portal}  />}
+                    <AddWishList productId={product.id} />
+                    {showAddBasket && <AddBasket product={product} portal={portal} />}
                 </div>
                 <div className="flex justify-between text-[14px] font-bold my-2">
                     <p className="">{product.name}</p>

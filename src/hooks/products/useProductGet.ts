@@ -4,7 +4,6 @@ import supabase from "../../supaBase/supaBase";
 const useProductGet = () => {
 
     const { data, error } = useQuery({
-
         queryKey: ['product'],
         queryFn: async () => {
 

@@ -6,7 +6,7 @@ import SigningUp from "./SigningUp"
 
 const LoginPage = () => {
 
-    const [toggleForm, setToggleForm] = useState("loginIn")
+    const [toggleForm, setToggleForm] = useState<"loginIn" | "loginUp">("loginIn")
     
     const [showAlert, setShowAlert] = useState('')
     const [err, setErr] = useState('')

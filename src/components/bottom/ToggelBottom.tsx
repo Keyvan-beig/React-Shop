@@ -1,6 +1,6 @@
 interface pageProg {
     size : string
-    setSize : any
+    setSize : (size:string)=>void
 }
 
 const ToggelBottom : React.FC<pageProg> = ({size,setSize}) => {
