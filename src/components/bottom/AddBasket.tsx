@@ -58,8 +58,9 @@ const AddBasket: React.FC<propType> = ({ product, portal }) => {
     }
 
     return (
-        <div
-            className={`
+        <>
+            <div
+                className={`
                 backdrop-blur-sm
                 absolute 
                 top-0 
@@ -72,12 +73,13 @@ const AddBasket: React.FC<propType> = ({ product, portal }) => {
                 justify-center 
                 ${IsInBasket && "z-20"}
                 `
-            }
-        >
-            <div className="bg-white p-3 rounded-[50%] text-[25px]" onClick={() => portal(product)}>
-                <SlBasket />
+                }
+            >
+                <div className="bg-white p-3 rounded-[50%] text-[25px]" onClick={()=> portal(product)}>
+                    <SlBasket />
+                </div>
             </div>
-        </div>
+        </>
     )
 }
 

@@ -1,11 +1,15 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { stateType, typeProductBasket } from "../types/typeBasket";
 import { RootState } from "./store";
+import getStorage from "../utils/storage/getStorage";
+import setStorage from "../utils/storage/setStorage";
+
+const storage = getStorage('basket')
 
 const stateItem: stateType = {
-    items: [],
+    items: storage ? storage.items : [],
     invoice: {
-        totalPrice: 0
+        totalPrice: storage ? storage.invoice.totalPrice : 0
     }
 }
 
@@ -30,6 +34,8 @@ const basketSlice = createSlice({
 
                 state.items.push(item)
 
+                setStorage("basket",{...state , items : state.items})
+
             }
         },
         removeItem: (state: stateType, action: typeAction) => {
@@ -43,6 +49,8 @@ const basketSlice = createSlice({
             if (alreadyExist) {
 
                 state.items = state.items.filter(_item => _item.id !== item.id)
+
+                setStorage("basket",{...state , items : state.items})
             }
         },
         updateBasket: (state: stateType, action: typeAction) => {
@@ -60,6 +68,8 @@ const basketSlice = createSlice({
 
                 return _item
             })
+
+            setStorage("basket",{...state , items : state.items})
         }
     }
 })

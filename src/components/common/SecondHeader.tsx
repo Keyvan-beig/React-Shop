@@ -1,13 +1,23 @@
-import { RxPerson } from "react-icons/rx";
 import AnchorTemporaryDrawer from "../../utils/AnchorTemporaryDrawer";
 import { useState } from "react";
 import ShowCartModal from "../../utils/ShowCartModal";
-import { NavLink } from "react-router-dom";
 import MenuAcount from "../menu/MenuAcount";
+import getStorage from "../../utils/storage/getStorage";
+import ShoudLogin from "../modal/ShoudLogin";
+import { useNavigate } from "react-router-dom";
 
 const SecondHeader = () => {
 
     const [showCart, setShowCart] = useState<boolean>()
+    const [open, setOpen] = useState(false);
+
+    const handelShowCart = () => {
+        const login = getStorage("login")
+        login ?
+            setShowCart(!showCart)
+            :
+            setOpen(true)
+    }
 
     return (
         <>
@@ -25,17 +35,20 @@ const SecondHeader = () => {
                     </div>
                 </div>
                 <div className="hidden lg:flex items-center">
-                    {/* <RxPerson /> */}
-                    {/* <NavLink to={"/login"} className="mx-1">Account</NavLink> */}
                     <MenuAcount />
-                    <p onClick={() => setShowCart(!showCart)} className="mx-5">Cart</p>
+                    <p onClick={handelShowCart} className="mx-5">Cart</p>
                 </div>
                 <div className="block lg:hidden">
                     <AnchorTemporaryDrawer />
                 </div>
             </div>
 
-            {showCart && <ShowCartModal setShowCart={setShowCart} />}
+            {showCart ?
+                <ShowCartModal setShowCart={setShowCart} />
+                :
+                ""
+            }
+            {open && <ShoudLogin open={open} setOpen={setOpen}/>}
         </>
 
     )

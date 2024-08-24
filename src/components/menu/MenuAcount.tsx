@@ -3,10 +3,12 @@ import Button from '@mui/material/Button';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import { RxPerson } from 'react-icons/rx';
+import { useNavigate } from 'react-router-dom';
 
 export default function BasicMenu() {
     const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
     const open = Boolean(anchorEl);
+    const navigate = useNavigate()
     const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
         setAnchorEl(event.currentTarget);
     };
@@ -36,8 +38,8 @@ export default function BasicMenu() {
                 }}
             >
                 <MenuItem onClick={handleClose}>Profile</MenuItem>
-                <MenuItem onClick={handleClose}>My account</MenuItem>
-                <MenuItem onClick={handleClose}>Logout</MenuItem>
+                <MenuItem onClick={()=>navigate("/login")}>Login</MenuItem>
+                <MenuItem onClick={()=>localStorage.removeItem("login")}>Logout</MenuItem>
             </Menu>
         </div>
     );
