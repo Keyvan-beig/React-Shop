@@ -31,26 +31,31 @@ const ShowCartModal: React.FC<propType> = ({ setShowCart }) => {
             items-center 
             justify-center
             fixed
-            z-30
+            z-10
             top-0
             w-full
-            h-[100vh]
+            h-full
             text-[14px]
+            backdrop-blur
             ">
             <div className="
                 grid 
                 gap-5 
-                lg:grid-cols-[2fr,1fr]
-                lg:grid-rows-[10px,auto]
+                md:grid-cols-[2fr,1fr]
+                md:grid-rows-[10px,auto]
                 grid-rows-[10px,auto,auto,auto]
-              bg-white 
                 rounded-lg
                 w-[80%]
-                h-[470px]
+                h-full
+                md:h-fit
+                overflow-scroll
+                md:overflow-auto
                 p-3
                 shadow-lg
-                ">
-                <div dir="rtl" className="lg:col-span-2">
+                bg-gray-50
+                "
+                >
+                <div dir="rtl" className="md:col-span-2">
                     <IoIosCloseCircleOutline className="text-[20px]" onClick={() => setShowCart(false)} />
                 </div>
                 <div className="[&>*]:border [&>*]:rounded-lg grid grid-rows-[220px,auto] gap-3 ">

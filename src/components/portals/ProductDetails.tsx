@@ -137,7 +137,6 @@ const ProductDetails: React.FC<PageProp> = ({ item, close }) => {
                                     close
                                 </button>
                             </div>
-
                         </div>
                     </div>
                 </div>
