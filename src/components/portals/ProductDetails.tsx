@@ -36,7 +36,7 @@ const ProductDetails: React.FC<PageProp> = ({ item, close }) => {
     const [modalOpen, setModalOpen] = useState(false);
     const [alertOpen, setAlertOpen] = useState(false);
 
-    const outSide = (event : MouseEvent) => {
+    const outSide = (event: MouseEvent) => {
         const target = event.target as HTMLElement
         if (target.id === "myDiv") {
             close(null)

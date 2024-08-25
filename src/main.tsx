@@ -10,9 +10,7 @@ const queryClient = new QueryClient({
       staleTime : Infinity
       
     }
-    
   }
-  
 })
 
 createRoot(document.getElementById('root')!).render(

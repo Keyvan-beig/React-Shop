@@ -1,18 +1,13 @@
 import { useMutation } from "@tanstack/react-query"
 import supabase from "../../supaBase/supaBase"
 
-interface typrFormList {
-    password: string
-    phone: string
-}
-
 const useCheckUser = () => {
     const { mutateAsync } = useMutation({
-        mutationFn: async (formList: typrFormList) => {
+        mutationFn: async (phone: string) => {
             const { data, error } = await supabase
                 .from('users')
                 .select("*")
-                .eq('phone', formList.phone)
+                .eq('phone', phone)
 
             return { data, error }
         }

@@ -7,6 +7,7 @@ import ErrorDialog from "../../components/modal/ErrorDialog"
 import Slider from "../../components/Slider"
 import ProductDetails from "../../components/portals/ProductDetails"
 import NavHeader from "../../components/common/NavHeader"
+import EditeUser from "../../components/portals/EditeUser"
 
 const IndexHome: React.FC = () => {
 
@@ -42,6 +43,8 @@ const IndexHome: React.FC = () => {
             {data?.error && <div className="h-[100vh] bg-white"><ErrorDialog message={data?.error.message} /></div>}
 
             {showPrtal && <ProductDetails item={showPrtal} close={setShowPortal} />}
+
+           
         </>
     )
 }

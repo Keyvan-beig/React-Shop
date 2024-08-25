@@ -4,11 +4,13 @@ import ShowCartModal from "../portals/ShowCartModal";
 import MenuAcount from "../menu/MenuAcount";
 import getStorage from "../../utils/storage/getStorage";
 import ShoudLogin from "../modal/ShoudLogin";
+import EditeUser from "../portals/EditeUser";
 
 const NavHeader: React.FC = () => {
 
     const [showCart, setShowCart] = useState<boolean>()
     const [alertOpen, setAlertOpen] = useState(false);
+    const [editeUser, setEditeUser] = useState(false)
 
     const handelShowCart = () => {
         const login = getStorage("login")
@@ -43,11 +45,13 @@ const NavHeader: React.FC = () => {
             </div>
 
             {showCart ?
-                <ShowCartModal setShowCart={setShowCart} />
+                <ShowCartModal setShowCart={setShowCart} setEditeUser={setEditeUser}/>
                 :
                 ""
             }
             {alertOpen && <ShoudLogin open={alertOpen} setOpen={setAlertOpen} />}
+
+            {editeUser && <EditeUser setEditeUser={setEditeUser}/>}
         </>
 
     )
