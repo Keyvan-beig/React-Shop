@@ -1,7 +1,7 @@
 import { useState } from "react"
 import styles from "./login.module.css"
 import AlertSnackBar from "../../components/alert/AlertSnackBar"
-import LoginUp from "./LoginUp"
+import LoginIn from "./LoginIn"
 import { useSelector } from "react-redux"
 import { commonState } from "../../redux/commonStateSlice"
 import SigningUp from "./SigningUp"
@@ -22,7 +22,7 @@ const LoginPage = () => {
 
                     <div className={styles.login__forms}>
 
-                        {toggleForm === "loginIn" && <LoginUp setToggleForm={setToggleForm} />}
+                        {toggleForm === "loginIn" && <LoginIn setToggleForm={setToggleForm} />}
 
                         {toggleForm === "loginUp" && <SigningUp setToggleForm={setToggleForm} />}
 

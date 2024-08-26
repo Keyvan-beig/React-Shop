@@ -11,9 +11,9 @@ const NavHeader: React.FC = () => {
     const [showCart, setShowCart] = useState<boolean>()
     const [alertOpen, setAlertOpen] = useState(false);
     const [editeUser, setEditeUser] = useState(false)
+    const login = getStorage("login")
 
     const handelShowCart = () => {
-        const login = getStorage("login")
         login ?
             setShowCart(!showCart)
             :
@@ -36,21 +36,16 @@ const NavHeader: React.FC = () => {
                     </div>
                 </div>
                 <div className="hidden lg:flex items-center">
-                    <MenuAcount setEditeUser={setEditeUser} />
+                    <MenuAcount setEditeUser={setEditeUser} setAlertOpen={setAlertOpen}/>
                     <button onClick={handelShowCart} className="mx-5">Cart</button>
                 </div>
                 <div className="block lg:hidden">
-                    <DrawerHome setShowCart={setShowCart} setAlertOpen={setAlertOpen} />
+                    <DrawerHome setShowCart={setShowCart} setAlertOpen={setAlertOpen} setEditeUser={setEditeUser}/>
                 </div>
             </div>
 
-            {showCart ?
-                <ShowCartModal setShowCart={setShowCart} setEditeUser={setEditeUser} />
-                :
-                ""
-            }
+            {showCart && <ShowCartModal setShowCart={setShowCart} setEditeUser={setEditeUser} />}
             {alertOpen && <ShoudLogin open={alertOpen} setOpen={setAlertOpen} />}
-
             {editeUser && <EditeUser setEditeUser={setEditeUser} />}
         </>
 

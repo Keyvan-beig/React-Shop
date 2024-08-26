@@ -3,10 +3,12 @@ import { SlBasket } from "react-icons/sl";
 import { CiHeart } from "react-icons/ci";
 import { useSelector } from "react-redux";
 import { basketState } from "../../redux/basketSlice";
+import { wishState } from "../../redux/wishListSlice";
 
 const Footer: React.FC = () => {
 
     const basket = useSelector(basketState)
+    const wishList = useSelector(wishState)
 
     return (
         <div className="
@@ -23,12 +25,12 @@ const Footer: React.FC = () => {
                 </div>
                 <div className="flex items-center gap-2">
                     <CiHeart className="text-[25px]" />
-                    <p>2 Wish list</p>
+                    <p>{wishList.itemsId.length} Wish list</p>
                 </div>
             </div>
             <div className="flex items-center gap-2">
                 <SlBasket className="text-[22px]" />
-                85$
+                {basket.invoice.totalPrice}
             </div>
         </div>
     )

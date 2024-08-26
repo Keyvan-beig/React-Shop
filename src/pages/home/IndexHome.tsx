@@ -42,8 +42,6 @@ const IndexHome: React.FC = () => {
             {data?.error && <div className="h-[100vh] bg-white"><ErrorDialog message={data?.error.message} /></div>}
 
             {showPrtal && <ProductDetails item={showPrtal} close={setShowPortal} />}
-
-           
         </>
     )
 }

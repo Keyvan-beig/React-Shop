@@ -4,7 +4,7 @@ import useCheckUser from "../../hooks/form/useCheckUser"
 import formData from "../../utils/form/formData"
 import setStorage from "../../utils/storage/setStorage"
 import { useNavigate } from "react-router-dom"
-import { alerShowSet, alertTypeSet, errorSet, loadingSet } from "../../redux/commonStateSlice"
+import { alerShowSet, alertTypeSet, loadingSet } from "../../redux/commonStateSlice"
 import LoadingBottom from "../../components/bottom/LodingBottom"
 import { useDispatch } from "react-redux"
 
@@ -12,7 +12,7 @@ interface propType {
     setToggleForm: (toggleForm: "loginIn" | "loginUp") => void
 }
 
-const LoginUp: React.FC<propType> = ({ setToggleForm }) => {
+const LoginIn: React.FC<propType> = ({ setToggleForm }) => {
 
     const loginInForm = useRef<any>()
     const { mutateAsync } = useCheckUser()
@@ -62,7 +62,7 @@ const LoginUp: React.FC<propType> = ({ setToggleForm }) => {
             <div className={styles.login__box}>
                 <input name="password" type="password" placeholder="Password" className="login__input outline-none" />
             </div>
-            <LoadingBottom text={'SignIn'} className={null} />
+            <LoadingBottom text={'Login'} className={null} />
             <div>
                 <span className={styles.login__account}>Don't have an Account ?</span>
                 <span className={styles.login__signin} onClick={() => setToggleForm("loginUp")} id="sign-up">Sign Up</span>
@@ -72,4 +72,4 @@ const LoginUp: React.FC<propType> = ({ setToggleForm }) => {
 
 }
 
-export default LoginUp
+export default LoginIn

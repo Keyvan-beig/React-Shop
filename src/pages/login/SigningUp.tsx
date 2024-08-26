@@ -76,7 +76,7 @@ const SigningUp: React.FC<propType> = ({ setToggleForm }) => {
             <LoadingBottom text={"Sign Up"} className={null}/>
             <div>
                 <span className={styles.login__account}>Already have an Account ?</span>
-                <span className={styles.login__signup} onClick={() => setToggleForm("loginIn")} id="sign-in">Sign In</span>
+                <span className={styles.login__signup} onClick={() => setToggleForm("loginIn")} id="sign-in">Login</span>
             </div>
         </form>
     )

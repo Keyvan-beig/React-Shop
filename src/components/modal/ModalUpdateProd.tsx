@@ -9,6 +9,7 @@ import Slide from '@mui/material/Slide';
 import { TransitionProps } from '@mui/material/transitions';
 import { useDispatch } from 'react-redux';
 import { updateBasket } from '../../redux/basketSlice';
+import { alerShowSet, alertTypeSet } from '../../redux/commonStateSlice';
 
 const Transition = React.forwardRef(function Transition(
     props: TransitionProps & {
@@ -19,19 +20,20 @@ const Transition = React.forwardRef(function Transition(
     return <Slide direction="up" ref={ref} {...props} />;
 });
 
-const ModalUpdateProd: React.FC<any> = ({ open, setOpen, item, alert }) => {
+const ModalUpdateProd: React.FC<any> = ({ open, setOpen, item }) => {
 
     const dispatch = useDispatch()
 
     const handleClose = () => {
+        
         setOpen(false);
     };
 
     const update = () => {
-
         dispatch(updateBasket(item))
         handleClose()
-        alert(true)
+        dispatch(alerShowSet(true))
+        dispatch(alertTypeSet('success'))
     }
 
     return (

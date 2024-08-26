@@ -56,7 +56,7 @@ const EditeUser: React.FC<propType> = ({ setEditeUser }) => {
     const ui = (
         <>
             <div id="myDiv" className="w-full h-full flex items-center justify-center fixed top-0 right-0 z-40 backdrop-blur">
-                <div className="shadow-lg w-[30%] bg-gray-50">
+                <div className="shadow-lg lg:w-[40%] md:w-[60%] w-[80%] bg-gray-50">
                     <form className="flex flex-col p-5 gap-5" onSubmit={handelSubmit}>
                         <div>
                             <label htmlFor="fullName">Full Name</label>

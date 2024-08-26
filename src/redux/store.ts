@@ -8,7 +8,6 @@ export const store = configureStore({
         basket,
         wishList,
         commonSlice
-
     }
 })
 export type RootState = ReturnType<typeof store.getState>

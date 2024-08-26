@@ -6,9 +6,12 @@ const useCreateAds = (table: string) => {
 
     const { mutateAsync } = useMutation({
 
-        mutationFn: async (dataList : dataListType) => {
+        mutationFn: async (dataList: dataListType) => {
 
-            const { data, error } = await supabase.from(table).insert([dataList]).select()
+            const { data, error } = await supabase
+                .from(table)
+                .insert([dataList])
+                .select()
 
             return { data, error }
         }

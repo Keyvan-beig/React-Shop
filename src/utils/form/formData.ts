@@ -1,6 +1,5 @@
 
 const formData = (form: HTMLFormElement) => {
-
     const formData = new FormData(form)
     const data = formData.entries()
     const formList: any = {}

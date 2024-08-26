@@ -1,12 +1,11 @@
 import Snackbar, { SnackbarCloseReason } from '@mui/material/Snackbar';
 import Alert from '@mui/material/Alert';
-import React, { useState } from 'react';
+import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { alerShowSet, commonState } from '../../redux/commonStateSlice';
 
 const AlertSnackBar = () => {
 
-  // const [open, setOpen] = useState(true)
   const commonStt = useSelector(commonState)
   const dispatch = useDispatch()
 
@@ -17,8 +16,6 @@ const AlertSnackBar = () => {
     if (reason === 'clickaway') {
       return;
     }
-    
-    // setOpen(false);
     dispatch(alerShowSet(false))
   };
 

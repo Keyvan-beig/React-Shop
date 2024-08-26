@@ -12,7 +12,6 @@ const useEditeUser = () => {
 
     const { mutateAsync } = useMutation({
         mutationFn: async (form: formType) => {
-            console.log(form);
             const { data, error } = await supabase
                 .from('users')
                 .update(form)

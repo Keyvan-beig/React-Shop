@@ -77,7 +77,5 @@ const basketSlice = createSlice({
 const { actions, reducer } = basketSlice
 
 export const { addItem, removeItem, updateBasket } = actions
-
 export const basketState = (state: RootState) => state.basket
-
 export default reducer

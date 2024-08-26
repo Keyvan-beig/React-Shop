@@ -19,10 +19,18 @@ import getStorage from '../utils/storage/getStorage';
 import LoginSharpIcon from '@mui/icons-material/LoginSharp';
 import LogoutSharpIcon from '@mui/icons-material/LogoutSharp';
 import { useNavigate } from 'react-router-dom';
+import logOutAcount from './menu/logOutAcount';
+import { useDispatch } from 'react-redux';
 
 type Anchor = 'top' | 'left' | 'bottom' | 'right';
 
-export default function DrawerHome({ setShowCart, setAlertOpen }: { setShowCart: any, setAlertOpen: any }) {
+interface propType {
+  setShowCart: any
+  setAlertOpen: any
+  setEditeUser: any
+}
+
+const DrawerHome: React.FC<propType> = ({ setShowCart, setAlertOpen, setEditeUser }) => {
 
   const [state, setState] = React.useState({
     top: false,
@@ -32,17 +40,25 @@ export default function DrawerHome({ setShowCart, setAlertOpen }: { setShowCart:
   });
 
   const navigate = useNavigate()
+  const dispatch = useDispatch()
   const handelShowCart = (index: number) => {
     const login = getStorage("login")
     if (index === 0) {
       login ? setShowCart(true) : setAlertOpen(true)
     }
-    if (index === 1) { }
+    if (index === 1) {
+      const login = getStorage("login")
+      if (login) {
+        setEditeUser(true)
+      } else {
+        setAlertOpen(true)
+      }
+    }
     if (index === 2) {
       navigate("/login")
     }
     if (index === 3) {
-      localStorage.removeItem("login")
+      logOutAcount(dispatch)
     }
   }
 
@@ -56,11 +72,8 @@ export default function DrawerHome({ setShowCart, setAlertOpen }: { setShowCart:
         ) {
           return;
         }
-
         setState({ ...state, [anchor]: open });
       };
-
-
 
   const list = (anchor: Anchor) => (
     <Box
@@ -120,3 +133,5 @@ export default function DrawerHome({ setShowCart, setAlertOpen }: { setShowCart:
     </div>
   );
 }
+
+export default DrawerHome
