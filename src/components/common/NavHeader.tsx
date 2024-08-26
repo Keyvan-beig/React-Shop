@@ -36,22 +36,22 @@ const NavHeader: React.FC = () => {
                     </div>
                 </div>
                 <div className="hidden lg:flex items-center">
-                    <MenuAcount />
+                    <MenuAcount setEditeUser={setEditeUser} />
                     <button onClick={handelShowCart} className="mx-5">Cart</button>
                 </div>
                 <div className="block lg:hidden">
-                    <DrawerHome setShowCart={setShowCart} setAlertOpen={setAlertOpen}/>
+                    <DrawerHome setShowCart={setShowCart} setAlertOpen={setAlertOpen} />
                 </div>
             </div>
 
             {showCart ?
-                <ShowCartModal setShowCart={setShowCart} setEditeUser={setEditeUser}/>
+                <ShowCartModal setShowCart={setShowCart} setEditeUser={setEditeUser} />
                 :
                 ""
             }
             {alertOpen && <ShoudLogin open={alertOpen} setOpen={setAlertOpen} />}
 
-            {editeUser && <EditeUser setEditeUser={setEditeUser}/>}
+            {editeUser && <EditeUser setEditeUser={setEditeUser} />}
         </>
 
     )

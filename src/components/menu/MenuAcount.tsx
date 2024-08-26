@@ -5,7 +5,11 @@ import MenuItem from '@mui/material/MenuItem';
 import { RxPerson } from 'react-icons/rx';
 import { useNavigate } from 'react-router-dom';
 
-export default function BasicMenu() {
+interface propType {
+    setEditeUser: (editeUser: boolean) => void
+}
+
+const BasicMenu: React.FC<propType> = ({ setEditeUser }) => {
     const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
     const open = Boolean(anchorEl);
     const navigate = useNavigate()
@@ -13,6 +17,7 @@ export default function BasicMenu() {
         setAnchorEl(event.currentTarget);
     };
     const handleClose = () => {
+        setEditeUser(true)
         setAnchorEl(null);
     };
 
@@ -26,7 +31,7 @@ export default function BasicMenu() {
                 aria-expanded={open ? 'true' : undefined}
                 onClick={handleClick}
             >
-                <RxPerson className='mx-1 text-[16px]'/> Account
+                <RxPerson className='mx-1 text-[16px]' /> Account
             </Button>
             <Menu
                 id="basic-menu"
@@ -38,9 +43,11 @@ export default function BasicMenu() {
                 }}
             >
                 <MenuItem onClick={handleClose}>Profile</MenuItem>
-                <MenuItem onClick={()=>navigate("/login")}>Login</MenuItem>
-                <MenuItem onClick={()=>localStorage.removeItem("login")}>Logout</MenuItem>
+                <MenuItem onClick={() => navigate("/login")}>Login</MenuItem>
+                <MenuItem onClick={() => localStorage.removeItem("login")}>Logout</MenuItem>
             </Menu>
         </div>
     );
 }
+
+export default BasicMenu

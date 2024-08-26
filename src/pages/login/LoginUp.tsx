@@ -27,14 +27,20 @@ const LoginUp: React.FC<propType> = ({ setShowAlert, setErr, setToggleForm }) =>
         setErr('')
 
         const { formList } = formData(loginInForm.current)
-        const { data } = await mutateAsync(formList)
+        const { data } = await mutateAsync(formList.phone)
 
         setLoading(false)
 
         if (data?.length) {
             if (data[0]?.password === formList?.password) {
 
-                setStorage("login", data[0])
+                const storage = {
+                    fullName: data[0].fullName,
+                    city: data[0].city,
+                    address: data[0].address,
+                    phone : data[0].phone
+                }
+                setStorage("login", storage)
                 setShowAlert('success')
                 setTimeout(() => navigat('/'), 3000)
             } else {
