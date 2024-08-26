@@ -3,8 +3,9 @@ import { FormEvent, useState } from "react"
 import getStorage from "../../utils/storage/getStorage"
 import useEditeUser from "../../hooks/form/useEditeUser"
 import setStorage from "../../utils/storage/setStorage"
-import { Box, CircularProgress } from "@mui/material"
-import AlertSnackBar from "../alert/AlertSnackBar"
+import { useDispatch } from "react-redux"
+import { alerShowSet, alertTypeSet, loadingSet } from "../../redux/commonStateSlice"
+import LoadingBottom from "../bottom/LodingBottom"
 
 
 interface propType {
@@ -14,9 +15,7 @@ interface propType {
 const EditeUser: React.FC<propType> = ({ setEditeUser }) => {
 
     const dataUser = getStorage("login")
-    const [loading, setLoading] = useState(false)
-    const [alert, setAlert] = useState("")
-    const [err, setErr] = useState("")
+    const dispatch = useDispatch()
 
     const [editeForm, setEditeForm] = useState({
         fullName: dataUser.fullName,
@@ -29,19 +28,20 @@ const EditeUser: React.FC<propType> = ({ setEditeUser }) => {
 
     const handelSubmit = async (e: FormEvent) => {
         e.preventDefault()
-        setLoading(true)
-        setAlert('')
-        setErr('')
+        dispatch(loadingSet(true))
 
         const { data } = await mutateAsync(editeForm)
 
-        setLoading(false)
+        dispatch(loadingSet(false))
 
         if (data?.length) {
             setStorage("login", editeForm)
-            setAlert('success')
+            dispatch(alerShowSet(true)) 
+            dispatch(alertTypeSet('success'))
+       
         } else {
-            setErr('error')
+            dispatch(alerShowSet(true))
+            dispatch(alertTypeSet('error'))
         }
     }
 
@@ -91,22 +91,10 @@ const EditeUser: React.FC<propType> = ({ setEditeUser }) => {
                                 className="border w-full p-2"
                             />
                         </div>
-                        <button type="submit" className="bg-blue-500 text-white font-bold p-3 flex justify-center gap-1">
-                            Edite
-                            {loading ?
-                                <Box sx={{ display: 'flex' }}>
-                                    <CircularProgress size={20} />
-                                </Box>
-                                :
-                                <p></p>
-                            }
-                        </button>
+                        <LoadingBottom text={'Edite'} className={null}/>
                     </form>
                 </div>
             </div>
-
-            {alert === "success" && <AlertSnackBar type={"success"} text={"complete request successfully"} />}
-            {err && <AlertSnackBar type={"error"} text={err} />}
         </>
     )
 

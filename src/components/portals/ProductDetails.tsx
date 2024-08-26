@@ -11,6 +11,7 @@ import { useState } from "react";
 import Count from "../bottom/Count";
 import ModalUpdateProd from "../modal/ModalUpdateProd";
 import AlertSnackBar from "../alert/AlertSnackBar";
+import { commonState } from "../../redux/commonStateSlice";
 
 interface PageProp {
     item: typeProduct
@@ -30,6 +31,7 @@ const ProductDetails: React.FC<PageProp> = ({ item, close }) => {
 
     const dispatch = useDispatch()
     const basket = useSelector(basketState)
+    const commonStt = useSelector(commonState)
 
     const [size, setSize] = useState("S")
     const [count, setCount] = useState(1)
@@ -150,11 +152,11 @@ const ProductDetails: React.FC<PageProp> = ({ item, close }) => {
                     item={{ ...item, count: count, size: size }}
                 />}
 
-            {alertOpen &&
+            {/* {alertOpen &&
                 <AlertSnackBar
                     type={"success"}
                     text="Your request has been successfully completed!" />
-            }
+            } */}
 
         </>
     )

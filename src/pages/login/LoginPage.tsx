@@ -2,14 +2,14 @@ import { useState } from "react"
 import styles from "./login.module.css"
 import AlertSnackBar from "../../components/alert/AlertSnackBar"
 import LoginUp from "./LoginUp"
+import { useSelector } from "react-redux"
+import { commonState } from "../../redux/commonStateSlice"
 import SigningUp from "./SigningUp"
 
 const LoginPage = () => {
 
     const [toggleForm, setToggleForm] = useState<"loginIn" | "loginUp">("loginIn")
-    
-    const [showAlert, setShowAlert] = useState('')
-    const [err, setErr] = useState('')
+    const commonStt = useSelector(commonState)
 
     return (
         <>
@@ -22,16 +22,15 @@ const LoginPage = () => {
 
                     <div className={styles.login__forms}>
 
-                        {toggleForm === "loginIn" && <LoginUp setShowAlert={setShowAlert} setErr={setErr} setToggleForm={setToggleForm}/>}
+                        {toggleForm === "loginIn" && <LoginUp setToggleForm={setToggleForm} />}
 
-                        {toggleForm === "loginUp" && <SigningUp setShowAlert={setShowAlert} setErr={setErr} setToggleForm={setToggleForm}/>}
+                        {toggleForm === "loginUp" && <SigningUp setToggleForm={setToggleForm} />}
 
                     </div>
                 </div>
             </div>
 
-            {showAlert === "success" && <AlertSnackBar type={"success"} text={"complete request successfully"} />}
-            {err && <AlertSnackBar type={"error"} text={err} />}
+            {commonStt.alert.alertShow && <AlertSnackBar/>}
         </>
     )
 }

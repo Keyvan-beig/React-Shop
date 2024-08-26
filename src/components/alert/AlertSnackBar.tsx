@@ -1,15 +1,14 @@
 import Snackbar, { SnackbarCloseReason } from '@mui/material/Snackbar';
 import Alert from '@mui/material/Alert';
 import React, { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { alerShowSet, commonState } from '../../redux/commonStateSlice';
 
-interface propType {
-  type: 'error' | 'success' | 'info' | 'warning'
-  text: string
-}
+const AlertSnackBar = () => {
 
-const AlertSnackBar: React.FC<propType> = ({ type, text }) => {
-
-  const [open, setOpen] = useState(true)
+  // const [open, setOpen] = useState(true)
+  const commonStt = useSelector(commonState)
+  const dispatch = useDispatch()
 
   const handleClose = (
     event?: React.SyntheticEvent | Event,
@@ -19,19 +18,20 @@ const AlertSnackBar: React.FC<propType> = ({ type, text }) => {
       return;
     }
     
-    setOpen(false);
+    // setOpen(false);
+    dispatch(alerShowSet(false))
   };
 
   return (
     <div>
-      <Snackbar open={open} autoHideDuration={4000} onClose={handleClose}>
+      <Snackbar open={commonStt.alert.alertShow} autoHideDuration={3000} onClose={handleClose}>
         <Alert
           onClose={handleClose}
-          severity={type}
+          severity={commonStt.alert.alertType}
           variant="filled"
           sx={{ width: '100%' }}
         >
-          {text}
+          {commonStt.alert.alertType}
         </Alert>
       </Snackbar>
     </div>

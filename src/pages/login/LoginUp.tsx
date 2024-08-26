@@ -1,35 +1,32 @@
 import styles from "./login.module.css"
-import { FormEvent, useRef, useState } from "react"
+import { FormEvent, useRef } from "react"
 import useCheckUser from "../../hooks/form/useCheckUser"
 import formData from "../../utils/form/formData"
-import { Box, CircularProgress } from "@mui/material"
 import setStorage from "../../utils/storage/setStorage"
 import { useNavigate } from "react-router-dom"
+import { alerShowSet, alertTypeSet, errorSet, loadingSet } from "../../redux/commonStateSlice"
+import LoadingBottom from "../../components/bottom/LodingBottom"
+import { useDispatch } from "react-redux"
 
 interface propType {
-    setShowAlert: (ShowAlert: string) => void
-    setErr: (err: string) => void
     setToggleForm: (toggleForm: "loginIn" | "loginUp") => void
 }
 
-const LoginUp: React.FC<propType> = ({ setShowAlert, setErr, setToggleForm }) => {
+const LoginUp: React.FC<propType> = ({ setToggleForm }) => {
 
     const loginInForm = useRef<any>()
-    const [loading, setLoading] = useState(false)
     const { mutateAsync } = useCheckUser()
     const navigat = useNavigate()
+    const dispatch = useDispatch()
 
     const handelSubmit = async (e: FormEvent) => {
         e.preventDefault()
-
-        setLoading(true)
-        setShowAlert('')
-        setErr('')
+        dispatch(loadingSet(true))
 
         const { formList } = formData(loginInForm.current)
         const { data } = await mutateAsync(formList.phone)
 
-        setLoading(false)
+        dispatch(loadingSet(false))
 
         if (data?.length) {
             if (data[0]?.password === formList?.password) {
@@ -38,16 +35,19 @@ const LoginUp: React.FC<propType> = ({ setShowAlert, setErr, setToggleForm }) =>
                     fullName: data[0].fullName,
                     city: data[0].city,
                     address: data[0].address,
-                    phone : data[0].phone
+                    phone: data[0].phone
                 }
                 setStorage("login", storage)
-                setShowAlert('success')
-                setTimeout(() => navigat('/'), 3000)
+                dispatch(alerShowSet(true))
+                dispatch(alertTypeSet('success'))
+                setTimeout(() => navigat('/'), 4000)
             } else {
-                setErr("Error")
+                dispatch(alerShowSet(true))
+                dispatch(alertTypeSet('error'))
             }
         } else {
-            setErr("Error")
+            dispatch(alerShowSet(true))
+            dispatch(alertTypeSet('error'))
         }
     }
 
@@ -62,14 +62,7 @@ const LoginUp: React.FC<propType> = ({ setShowAlert, setErr, setToggleForm }) =>
             <div className={styles.login__box}>
                 <input name="password" type="password" placeholder="Password" className="login__input outline-none" />
             </div>
-
-            <button type="submit" disabled={loading} className={`${styles.login__button} flex items-center gap-2`}>
-                Sign In
-                {loading &&
-                    <Box sx={{ display: 'flex' }}>
-                        <CircularProgress size={20} />
-                    </Box>}
-            </button>
+            <LoadingBottom text={'SignIn'} className={null} />
             <div>
                 <span className={styles.login__account}>Don't have an Account ?</span>
                 <span className={styles.login__signin} onClick={() => setToggleForm("loginUp")} id="sign-up">Sign Up</span>
