@@ -1,10 +1,12 @@
-import { useState } from "react"
+import { Suspense, lazy, useState } from "react"
 import styles from "./login.module.css"
-import AlertSnackBar from "../../components/alert/AlertSnackBar"
 import LoginIn from "./LoginIn"
 import { useSelector } from "react-redux"
 import { commonState } from "../../redux/commonStateSlice"
-import SigningUp from "./SigningUp"
+import BackDropLoading from "../../components/loading/BackDropLoading"
+
+const LazySigningUp = lazy(() => import('./SigningUp'))
+const LazyAlertSnackBar = lazy(() => import('../../components/alert/AlertSnackBar'))
 
 const LoginPage = () => {
 
@@ -24,13 +26,15 @@ const LoginPage = () => {
 
                         {toggleForm === "loginIn" && <LoginIn setToggleForm={setToggleForm} />}
 
-                        {toggleForm === "loginUp" && <SigningUp setToggleForm={setToggleForm} />}
-
+                        <Suspense fallback={<BackDropLoading />}>
+                            {toggleForm === "loginUp" && <LazySigningUp setToggleForm={setToggleForm} />}
+                        </Suspense>
                     </div>
                 </div>
             </div>
-
-            {commonStt.alert.alertShow && <AlertSnackBar/>}
+            <Suspense fallback={<BackDropLoading />}>
+                {commonStt.alert.alertShow && <LazyAlertSnackBar />}
+            </Suspense>
         </>
     )
 }

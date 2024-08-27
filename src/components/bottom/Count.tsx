@@ -22,7 +22,6 @@ const Count: React.FC<countType> = ({ count, setCount }) => {
                 <CiCirclePlus className="text-[20px]" />
             </button>
         </div>
-
     )
 }
 

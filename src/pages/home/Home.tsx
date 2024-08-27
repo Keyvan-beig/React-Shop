@@ -3,7 +3,9 @@ import Header from "../../components/common/Header"
 import Footer from "../../components/common/Footer"
 import { useSelector } from "react-redux"
 import { commonState } from "../../redux/commonStateSlice"
-import AlertSnackBar from "../../components/alert/AlertSnackBar"
+import { Suspense, lazy } from "react"
+import BackDropLoading from "../../components/loading/BackDropLoading"
+const LazyAlertSnackBar = lazy(() => import('../../components/alert/AlertSnackBar'))
 
 const Home: React.FC = () => {
 
@@ -13,9 +15,11 @@ const Home: React.FC = () => {
         <>
             <Header />
             <Outlet />
-            <Footer/>
+            <Footer />
 
-            {states.alert.alertShow && <AlertSnackBar/>}
+            <Suspense fallback={<BackDropLoading />}>
+                {states.alert.alertShow && <LazyAlertSnackBar />}
+            </Suspense>
         </>
     )
 }

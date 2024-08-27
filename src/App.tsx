@@ -10,7 +10,7 @@ function App() {
     <>
       <BrowserRouter>
         <Provider store={store}>
-          <Routes />
+            <Routes />
         </Provider>
       </BrowserRouter>
     </>

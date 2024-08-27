@@ -3,26 +3,26 @@ import Home from "./pages/home/Home"
 import IndexHome from "./pages/home/IndexHome"
 import LoginPage from "./pages/login/LoginPage"
 
-const Routes = ()=>{
+const Routes = () => {
     let roters = useRoutes([
         {
-            path : "/",
-            element : <Home/>,
-            children : [
+            path: "/",
+            element: <Home />,
+            children: [
                 {
-                    index : true,
-                    element : <IndexHome/>
-                }  
+                    index: true,
+                    element: <IndexHome />
+                }
             ]
         },
         {
-            path:'/login',
+            path: '/login',
             element : <LoginPage/>
         }
     ])
 
     return roters
-        
+
 }
 
 export default Routes

@@ -1,10 +1,12 @@
-import DrawerHome from "../DrawerHome";
-import { useState } from "react";
-import ShowCartModal from "../portals/ShowCartModal";
-import MenuAcount from "../menu/MenuAcount";
+import { Suspense, lazy, useState } from "react";
 import getStorage from "../../utils/storage/getStorage";
-import ShoudLogin from "../modal/ShoudLogin";
-import EditeUser from "../portals/EditeUser";
+import BackDropLoading from "../loading/BackDropLoading";
+
+const LazyEditeUser = lazy(() => import('../portals/EditeUser'))
+const LazyShoudLogin = lazy(() => import('../modal/ShoudLogin'))
+const LazyShowCartModal = lazy(() => import('../portals/ShowCartModal'))
+const LazyDrawerHome = lazy(() => import('../DrawerHome'))
+const LazyMenuAcount = lazy(() => import('../menu/MenuAcount'))
 
 const NavHeader: React.FC = () => {
 
@@ -36,17 +38,23 @@ const NavHeader: React.FC = () => {
                     </div>
                 </div>
                 <div className="hidden lg:flex items-center">
-                    <MenuAcount setEditeUser={setEditeUser} setAlertOpen={setAlertOpen}/>
+                    <Suspense fallback={<BackDropLoading />}>
+                        <LazyMenuAcount setEditeUser={setEditeUser} setAlertOpen={setAlertOpen} />
+                    </Suspense>
                     <button onClick={handelShowCart} className="mx-5">Cart</button>
                 </div>
                 <div className="block lg:hidden">
-                    <DrawerHome setShowCart={setShowCart} setAlertOpen={setAlertOpen} setEditeUser={setEditeUser}/>
+                    <Suspense fallback={<BackDropLoading />}>
+                        <LazyDrawerHome setShowCart={setShowCart} setAlertOpen={setAlertOpen} setEditeUser={setEditeUser} />
+                    </Suspense>
                 </div>
             </div>
 
-            {showCart && <ShowCartModal setShowCart={setShowCart} setEditeUser={setEditeUser} />}
-            {alertOpen && <ShoudLogin open={alertOpen} setOpen={setAlertOpen} />}
-            {editeUser && <EditeUser setEditeUser={setEditeUser} />}
+            <Suspense fallback={<BackDropLoading />}>
+                {showCart && <LazyShowCartModal setShowCart={setShowCart} setEditeUser={setEditeUser} />}
+                {alertOpen && <LazyShoudLogin open={alertOpen} setOpen={setAlertOpen} />}
+                {editeUser && <LazyEditeUser setEditeUser={setEditeUser} />}
+            </Suspense>
         </>
 
     )
