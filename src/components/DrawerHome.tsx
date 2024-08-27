@@ -25,9 +25,9 @@ import { useDispatch } from 'react-redux';
 type Anchor = 'top' | 'left' | 'bottom' | 'right';
 
 interface propType {
-  setShowCart: any
-  setAlertOpen: any
-  setEditeUser: any
+  setShowCart: (showCart: boolean) => void
+  setAlertOpen: (alertOpen: boolean) => void
+  setEditeUser: (editeUser: boolean) => void
 }
 
 const DrawerHome: React.FC<propType> = ({ setShowCart, setAlertOpen, setEditeUser }) => {

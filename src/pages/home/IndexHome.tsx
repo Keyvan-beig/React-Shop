@@ -22,9 +22,9 @@ const IndexHome: React.FC = () => {
             {data?.data &&
                 <div className="m-auto w-[90%] bg-gray-50 p-5">
                     <NavHeader />
-                    <div className="w-[100%] h-44 border">
-                        <Slider />
-                    </div>
+
+                    <Slider />
+
                     <div className="
                     grid
                     md:grid-cols-2
@@ -47,7 +47,7 @@ const IndexHome: React.FC = () => {
 
                 {showPrtal &&
                     <LazyProductDetails item={showPrtal} close={setShowPortal} />}
-                    
+
             </Suspense>
         </>
     )
