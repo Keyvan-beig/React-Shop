@@ -5,9 +5,6 @@ interface propType {
 }
 const Input: React.FC<propType> = ({ placeholder, classes }) => {
 
-    console.log(placeholder);
-
-
     return (
         <div className="
           bg-white

@@ -31,7 +31,7 @@ const SigningUp: React.FC<propType> = ({ setToggleForm }) => {
 
             dispatch(loadingSet(true))
 
-            const { data: check } = await checkUser(formList)
+            const { data: check } = await checkUser(formList.phone)
 
             if (check && !check.length) {
                 const { data } = await mutateAsync(formList)
@@ -45,6 +45,7 @@ const SigningUp: React.FC<propType> = ({ setToggleForm }) => {
                     dispatch(alertTypeSet('error'))
                 }
             } else {
+                dispatch(loadingSet(false))
                 dispatch(alerShowSet(true))
                 dispatch(alertTypeSet('error'))
             }

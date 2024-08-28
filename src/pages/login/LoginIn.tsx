@@ -26,10 +26,8 @@ const LoginIn: React.FC<propType> = ({ setToggleForm }) => {
     const handelSubmit = async (e: FormEvent) => {
         e.preventDefault()
 
-        const { formList } = formData(loginInForm.current )
-        console.log(typeof loginInForm.current);
+        const { formList } = formData(loginInForm.current)
         
-
         if (phoneInput(formList.phone) && passwordInput(formList.password)) {
 
             dispatch(loadingSet(true))
