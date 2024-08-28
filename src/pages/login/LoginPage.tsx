@@ -1,5 +1,5 @@
 import { Suspense, lazy, useState } from "react"
-import styles from "./login.module.css"
+import StylesLogin from "../../../public/style/StylesLogin.module.css"
 import LoginIn from "./LoginIn"
 import { useSelector } from "react-redux"
 import { commonState } from "../../redux/commonStateSlice"
@@ -16,13 +16,13 @@ const LoginPage = () => {
     return (
         <>
             <link href='https://cdn.jsdelivr.net/npm/boxicons@2.0.5/css/boxicons.min.css' rel='stylesheet' />
-            <div className={styles.login}>
-                <div className={styles.login__content}>
-                    <div className={styles.login__img}>
+            <div className={StylesLogin.login}>
+                <div className={StylesLogin.login__content}>
+                    <div className={StylesLogin.login__img}>
                         <img src="https://raw.githubusercontent.com/bedimcode/responsive-login-signin-signup/b3c2eaa19d76624092bd606d28fbd616d539de92/assets/img/img-login.svg" alt="" />
                     </div>
 
-                    <div className={styles.login__forms}>
+                    <div className={StylesLogin.login__forms}>
 
                         {toggleForm === "loginIn" && <LoginIn setToggleForm={setToggleForm} />}
 

@@ -1,8 +1,8 @@
-import styles from "./login.module.css"
+import StylesLogin from "../../../public/style/StylesLogin.module.css"
 import { FormEvent, useRef } from "react"
 import useCheckUser from "../../hooks/form/useCheckUser"
 import formData from "../../utils/form/formData"
-import setStorage from "../../utils/storage/setStorage"
+import setStorage from "../../utils/storage/setStorage" 
 import { useNavigate } from "react-router-dom"
 import { alerShowSet, alertTypeSet, loadingSet } from "../../redux/commonStateSlice"
 import LoadingBottom from "../../components/bottom/LodingBottom"
@@ -17,7 +17,7 @@ interface propType {
 
 const LoginIn: React.FC<propType> = ({ setToggleForm }) => {
 
-    const loginInForm = useRef<any>()
+    const loginInForm = useRef<HTMLFormElement>(null)
     const { mutateAsync } = useCheckUser()
     const navigat = useNavigate()
     const dispatch = useDispatch()
@@ -26,7 +26,9 @@ const LoginIn: React.FC<propType> = ({ setToggleForm }) => {
     const handelSubmit = async (e: FormEvent) => {
         e.preventDefault()
 
-        const { formList } = formData(loginInForm.current)
+        const { formList } = formData(loginInForm.current )
+        console.log(typeof loginInForm.current);
+        
 
         if (phoneInput(formList.phone) && passwordInput(formList.password)) {
 
@@ -60,19 +62,19 @@ const LoginIn: React.FC<propType> = ({ setToggleForm }) => {
     }
 
     return (
-        <form onSubmit={handelSubmit} className={`${styles.login__registre} grid gap-3 `} id="login-in" ref={loginInForm}>
-            <h1 className={styles.login__title}>Sign In</h1>
+        <form onSubmit={handelSubmit} className={`${StylesLogin.login__registre} grid gap-3 `} id="login-in" ref={loginInForm}>
+            <h1 className={StylesLogin.login__title}>Sign In</h1>
             <PhoneInput />
             <PassInput />
             <LoadingBottom text={'Login'} className={null} />
             <div>
                 <span
-                    className={styles.login__account}
+                    className={StylesLogin.login__account}
                 >
                     Don't have an Account ?
                 </span>
                 <span
-                    className={styles.login__signin}
+                    className={StylesLogin.login__signin}
                     onClick={() => setToggleForm("loginUp")}
                     id="sign-up">
                     Sign Up

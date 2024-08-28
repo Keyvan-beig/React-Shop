@@ -2,7 +2,7 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import 'swiper/css/pagination';
 import 'swiper/css/navigation';
-import "../../public/style/sliderStyle.css"
+import StylesSlider from '../../public/style/StylesSlider.module.css'
 import baner1 from '../../public/photo/baner1.jpg'
 import baner2 from '../../public/photo/baner2.jpg'
 
@@ -23,7 +23,7 @@ export default function Slider() {
         }}
         navigation={true}
         modules={[Autoplay, Pagination, Navigation]}
-        className="mySwiper"
+        className={StylesSlider.mySwiper}
       >
         <SwiperSlide ><img src={baner1} /></SwiperSlide>
         <SwiperSlide ><img src={baner2} /></SwiperSlide>

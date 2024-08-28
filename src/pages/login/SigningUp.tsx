@@ -1,4 +1,4 @@
-import styles from "./login.module.css"
+import StylesLogin from "../../../public/style/StylesLogin.module.css"
 import { FormEvent, useRef } from "react"
 import formData from "../../utils/form/formData"
 import useCreateAds from "../../hooks/form/useCreateAds"
@@ -54,11 +54,11 @@ const SigningUp: React.FC<propType> = ({ setToggleForm }) => {
     return (
         <form
             onSubmit={handelSignUp}
-            className={`${styles.login__create} grid gap-3`}
+            className={`${StylesLogin.login__create} grid gap-3`}
             id="login-up"
             ref={loginUpForm}
         >
-            <h1 className={styles.login__title}>Create Account</h1>
+            <h1 className={StylesLogin.login__title}>Create Account</h1>
 
             <Input placeholder={"fullName"} classes={null} />
 
@@ -73,11 +73,11 @@ const SigningUp: React.FC<propType> = ({ setToggleForm }) => {
             <LoadingBottom text={"Sign Up"} className={null} />
 
             <div>
-                <span className={styles.login__account}>
+                <span className={StylesLogin.login__account}>
                     Already have an Account ?
                 </span>
                 <span
-                    className={styles.login__signup}
+                    className={StylesLogin.login__signup}
                     onClick={() => setToggleForm("loginIn")}
                     id="sign-in"
                 >
