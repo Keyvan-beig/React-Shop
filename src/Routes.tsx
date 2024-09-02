@@ -1,7 +1,8 @@
 import { useRoutes } from "react-router-dom"
 import Home from "./pages/home/Home"
-import IndexHome from "./pages/home/IndexHome"
 import LoginPage from "./pages/login/LoginPage"
+import { lazy } from "react"
+const IndexHome = lazy(()=>import('./pages/home/IndexHome'))
 
 const Routes = () => {
     let roters = useRoutes([

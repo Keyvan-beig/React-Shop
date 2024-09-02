@@ -5,6 +5,7 @@ import useProductGet from "../../hooks/products/useProductGet"
 import BackDropLoading from "../../components/loading/BackDropLoading"
 import Slider from "../../components/Slider"
 import NavHeader from "../../components/common/NavHeader"
+import SkeletonLoad from "../../components/loading/SkeletonLoad"
 
 const LazyProductDetails = lazy(() => import('../../components/portals/ProductDetails'))
 const LazyErrorDialog = lazy(() => import('../../components/modal/ErrorDialog'))
@@ -15,8 +16,9 @@ const IndexHome: React.FC = () => {
     return (
         <>
             {!data?.data && !data?.error &&
-                <div className="h-[100vh] bg-white">
-                    <BackDropLoading />
+                <div className="bg-white">
+                    {/* <BackDropLoading /> */}
+                    <SkeletonLoad/>
                 </div>}
 
             {data?.data &&
@@ -39,15 +41,12 @@ const IndexHome: React.FC = () => {
             }
 
             <Suspense fallback={<BackDropLoading />}>
-
                 {data?.error &&
                     <div className="h-[100vh] bg-white">
                         <LazyErrorDialog message={data?.error.message} />
                     </div>}
-
                 {showPrtal &&
                     <LazyProductDetails item={showPrtal} close={setShowPortal} />}
-
             </Suspense>
         </>
     )

@@ -11,24 +11,26 @@ import { Autoplay, Pagination, Navigation } from 'swiper/modules';
 export default function Slider() {
   return (
     <>
-      <Swiper
-        spaceBetween={30}
-        centeredSlides={true}
-        autoplay={{
-          delay: 5000, 
-          disableOnInteraction: false,
-        }}
-        pagination={{
-          clickable: true,
-        }}
-        navigation={true}
-        modules={[Autoplay, Pagination, Navigation]}
-        className={StylesSlider.mySwiper}
-      >
-        <SwiperSlide ><img src={baner1} /></SwiperSlide>
-        <SwiperSlide ><img src={baner2} /></SwiperSlide>
+      <div style={{width:"100%",aspectRatio:"10/3"}}>
+        <Swiper
+          spaceBetween={30}
+          centeredSlides={true}
+          autoplay={{
+            delay: 5000,
+            disableOnInteraction: false,
+          }}
+          pagination={{
+            clickable: true,
+          }}
+          navigation={true}
+          modules={[Autoplay, Pagination, Navigation]}
+          className={StylesSlider.mySwiper}
+        >
+          <SwiperSlide ><img src={baner1} /></SwiperSlide>
+          <SwiperSlide ><img src={baner2} /></SwiperSlide>
 
-      </Swiper>
+        </Swiper>
+      </div>
     </>
   );
 }

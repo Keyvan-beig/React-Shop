@@ -23,6 +23,7 @@ const ShowItem: React.FC<propType> = ({ product, portal }) => {
                 >
                     <img
                         className="w-[100%] rounded-2xl"
+                        style={{aspectRatio: "12 / 10"}}
                         src={product.image}
                         alt={product.name}
 
